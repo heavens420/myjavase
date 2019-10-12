@@ -1,4 +1,4 @@
-package com.zlx.JUC;
+package datastructure;
 
 
 //        选择排序（Selection sort）是一种简单直观的排序算法。

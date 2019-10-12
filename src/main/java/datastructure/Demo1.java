@@ -1,4 +1,4 @@
-package com.zlx.JUC;
+package datastructure;
 
 import java.io.IOException;
 /*

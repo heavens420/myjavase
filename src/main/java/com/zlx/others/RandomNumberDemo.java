@@ -1,4 +1,4 @@
-package com.zlx.JUC;
+package com.zlx.others;
 
 import java.util.Random;
 
