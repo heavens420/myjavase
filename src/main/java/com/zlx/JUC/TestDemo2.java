@@ -1,4 +1,4 @@
-package com.zlx.test;
+package com.zlx.JUC;
 
 import lambdaTest.interface1;
 

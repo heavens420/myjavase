@@ -1,6 +1,5 @@
-package com.zlx.test;
+package com.zlx.JUC;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;

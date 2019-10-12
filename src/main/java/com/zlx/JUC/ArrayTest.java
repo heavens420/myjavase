@@ -1,7 +1,6 @@
-package com.zlx.test;
+package com.zlx.JUC;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ArrayTest {

@@ -1,15 +1,6 @@
-package com.zlx.test;
+package com.zlx.JUC;
 
-import javax.sound.midi.Soundbank;
-import java.security.PublicKey;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.function.Function;
 
 import static java.util.concurrent.Executors.*;
 
@@ -65,8 +56,6 @@ public  class TestDemo {
             System.out.println("我好呢 这世界");
         }
     }
-
-
 
 
 }

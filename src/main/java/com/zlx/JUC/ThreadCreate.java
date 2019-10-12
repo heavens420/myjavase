@@ -1,4 +1,4 @@
-package com.zlx.test;
+package com.zlx.JUC;
 
 public class ThreadCreate {
     public static void main(String[] args) {
