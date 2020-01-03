@@ -1,4 +1,4 @@
-package com.zlx.others;
+package com.zlx.java8features;
 
 import java.util.ArrayList;
 import java.util.Arrays;

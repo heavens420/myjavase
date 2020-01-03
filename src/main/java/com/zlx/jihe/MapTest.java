@@ -35,12 +35,18 @@ public class MapTest {
             System.out.println(key+":"+value);
         }
 
-        //最简单的方式 效率较低
+        //曾经最简单的方式 效率较低
         for (String key:map.keySet()){
             String value = map.get(key);
             System.out.println(key+":"+value);
         }
 
+
+        //通过 foreach和lambda表达式遍历
+        map.forEach((key,value) -> System.out.println(key + " " + value));
+
+        //通过遍历map.entryset 遍历map
+        map.entrySet().forEach(entry -> System.out.println(entry.getKey()+"--"+entry.getValue()));
 
         List<String> list = new ArrayList<String>(Arrays.asList("ff","tt"));
         Collections.addAll(list,"1","2","3","dfsfsf");
