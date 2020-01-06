@@ -30,7 +30,7 @@ public class SynchronizedDemo {
 
         //new Thread(phone::sendMsm).start();
 
-        new Thread(phone::say).start();
+        new Thread(() -> phone.say()).start();
 
         new Thread(phone1::sendMsm).start();
     }
