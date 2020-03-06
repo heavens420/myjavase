@@ -15,10 +15,10 @@ public class Demo1 {
         System.out.println(Arrays.toString(array));
         System.out.println();
 
-        //方式一  从左往右排
+        //方式一  从左往右排 先排小
         //maopao(array);
 
-        //方式二  从右往左排
+        //方式二  从右往左排 先排大
         maopao2(array);
 
         //优化后的冒泡排序
