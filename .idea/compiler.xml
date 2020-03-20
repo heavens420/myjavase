@@ -9,5 +9,6 @@
         <module name="MavenTest" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="13" />
   </component>
 </project>
