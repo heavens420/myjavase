@@ -1,4 +1,4 @@
-package com.zlx.java8features;
+package com.zlx.date;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
@@ -12,10 +12,10 @@ import java.util.stream.Stream;
 /**
  * 新日期类
  */
-public class date {
+public class NewDate {
     public static void main(String[] args) {
 
-        //获取当前系统时间
+        //获取当前系统时间 ZoneDateTime 可设时区 其它一致
         LocalDateTime dateTime = LocalDateTime.now();
         System.out.println(dateTime);
 

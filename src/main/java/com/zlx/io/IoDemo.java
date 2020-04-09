@@ -8,7 +8,6 @@ public class IoDemo {
         String filePath = "C:\\Users\\420\\Desktop\\source/io.txt";
         String filePath2 = "C:\\Users\\420\\Desktop\\source/io2.txt";
 
-
 //       ioTest01();
 //        ioTest2();
 //        ioTest3();
