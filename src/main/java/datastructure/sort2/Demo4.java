@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.sort2;
 
 import java.util.Arrays;
 
@@ -10,17 +10,17 @@ import java.util.Arrays;
  */
 public class Demo4 {
     public static void main(String[] args) {
-//        int[] array = new int[]{1, 5, 3, 9, 54, 23, 90, 11, 23, 77, 8};
-//        shellSort(array);
+        int[] array = new int[]{12, 5, 3, 9, 54, 23, 90, 11, 23, 77, 8};
+        shellSort(array);
 
-        int[] array = new int[80000];
-        for (int i = 0; i < 80000; i++) {
-            array[i] = i;
-        }
-        long start = System.currentTimeMillis();
-        test(array);
-        long end = System.currentTimeMillis();
-        System.out.println(end - start);
+//        int[] array = new int[80000];
+//        for (int i = 0; i < 80000; i++) {
+//            array[i] = i;
+//        }
+//        long start = System.currentTimeMillis();
+//        test(array);
+//        long end = System.currentTimeMillis();
+//        System.out.println(end - start);
     }
 
 

@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.search;
 
 import java.security.PublicKey;
 import java.util.Arrays;
@@ -9,8 +9,10 @@ import java.util.Arrays;
  */
 public class BinderySearch {
     public static void main(String[] args) {
-        int[] arr = {1,2,3,4,5,6,7,10,20,90};
-        int target = 90; //要查找的目标值
+//        int[] arr = {1,2,3,4,5,6,7,10,20,90};
+        int[] arr = {34,65,65,65,65,65,99};
+
+        int target = 65; //要查找的目标值
         System.out.println(find(arr, target));
     }
 
@@ -19,7 +21,7 @@ public class BinderySearch {
         int right = arr.length - 1;
         int mid = 0;
 
-        while (left <= right){
+        while (left < right){
             mid = left + (right - left)/2;
             if (target < arr[mid]){
                 right = mid - 1;

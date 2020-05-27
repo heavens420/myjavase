@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.sort2;
 
 import java.util.Arrays;
 

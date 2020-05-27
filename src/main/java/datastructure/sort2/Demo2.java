@@ -1,4 +1,4 @@
-package datastructure;
+package datastructure.sort2;
 
 
 //        选择排序（Selection sort）是一种简单直观的排序算法。
@@ -13,11 +13,11 @@ import java.util.Arrays;
 
 public class Demo2 {
     public static void main(String[] args) {
-//        int[] array = {2, 6, 1, 7, 9, 5};
-        int[] array = new int[80000];
-        for (int i = 0; i < 80000; i++) {
-            array[i] = (int)Math.random()*99999+1;
-        }
+        int[] array = {2, 6, 1, 7, 9, 5};
+//        int[] array = new int[80000];
+//        for (int i = 0; i < 80000; i++) {
+//            array[i] = (int)Math.random()*99999+1;
+//        }
         System.out.print("原数组： ");
         System.out.println(Arrays.toString(array));
         System.out.println();
@@ -25,8 +25,8 @@ public class Demo2 {
         long start = System.currentTimeMillis();
 //        xuanze(array);
 //        selectSort(array);
-//        test(array);
-        test2(array);
+        test(array);
+//        test2(array);
         long end = System.currentTimeMillis();
         System.out.println(end - start);
     }
@@ -94,8 +94,8 @@ public class Demo2 {
             arr[i] = arr[k];
             arr[k] = temp;
 
-//            System.out.println("第" + (i + 1) + "趟排序后：");
-//            System.out.println(Arrays.toString(arr));
+            System.out.println("第" + (i + 1) + "趟排序后：");
+            System.out.println(Arrays.toString(arr));
         }
     }
 
