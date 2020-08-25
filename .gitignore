@@ -1,0 +1,18 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+target/classes/META-INF/
+target/classes/com/zlx/guava/
+target/classes/com/zlx/java8features/MyJoiner.class
+target/classes/com/zlx/java8features/Test1.class
+target/classes/com/zlx/poi/
+target/classes/com/zlx/singleton/
+target/classes/datastructure/array/
+target/classes/datastructure/game/
+target/classes/datastructure/linkdlist/
+target/classes/datastructure/questions/
+target/classes/datastructure/search/
+target/classes/datastructure/sort/
+target/classes/datastructure/sort2/
+target/classes/lambdaTest/ForEach.class
+target/generated-sources/
+target/maven-status/
