@@ -1,4 +1,4 @@
-package com.zlx.others;
+package com.zlx.javase;
 
 public class FandS {
     public void say(){

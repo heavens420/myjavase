@@ -1,6 +1,4 @@
-package com.zlx.others;
-
-import com.zlx.GOF.methodfadctory2.User;
+package com.zlx.javase;
 
 public class Chengfabiao {
     public static void main(String[] args) {

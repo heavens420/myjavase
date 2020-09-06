@@ -1,4 +1,4 @@
-package com.zlx.others;
+package com.zlx.javase;
 
 import java.util.Collection;
 import java.util.Iterator;

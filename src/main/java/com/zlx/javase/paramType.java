@@ -1,4 +1,4 @@
-package com.zlx.others;
+package com.zlx.javase;
 
 public class paramType {
     public static void main(String[] args) {
