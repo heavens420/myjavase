@@ -14,6 +14,9 @@ import java.util.*;
  */
 
 public class EasyExcelTest {
+
+    private String book;
+
     public static void main(String[] args) {
 
         Map<String, String> map = new HashMap<>(8);

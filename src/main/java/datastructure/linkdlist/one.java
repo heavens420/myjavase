@@ -26,14 +26,15 @@ public class one {
 //        MyNode node = new MyNode(5,null,null);
 //        linkedList.delete(node);
 
+        linkedList.reverseLinkList(linkedList.getHead());
         linkedList.printLinkList();
 
         //统计有效节点个数
 //        System.out.println("链表的有效长度为"+linkedList.getLength(linkedList.getHead()));
 
         //查找倒数第n个节点
-        int index = 10;
-        MyNode targetNode = linkedList.getNode(linkedList.getHead(), index);
+//        int index = 10;
+//        MyNode targetNode = linkedList.getNode(linkedList.getHead(), index);
 //        System.out.println("倒数第"+index+"个节点是"+targetNode);
     }
 }
@@ -258,5 +259,28 @@ class MyLinkedList{
             temp = temp.next;
         }
         return temp;
+    }
+
+    //3.反转单链表
+    public void reverseLinkList(MyNode head){
+        MyNode temp = head.next;
+        MyNode next = null;
+        //新建反转后链表的头节点
+        MyNode reverseNode = new MyNode(0,null,null);
+        if (temp.next == null){
+            System.out.println("链表为空");
+            return;
+        }
+
+        //遍历链表
+        while (temp.next != null){
+            //保存反转节点的下一个节点，防止打开链表之后，该节点丢失
+            next = temp.next;
+            temp.next = reverseNode.next;
+            reverseNode.next = next;
+            //节点后移
+            temp = next;
+        }
+        head.next = reverseNode.next;
     }
 }

@@ -6,7 +6,7 @@ public class SingeTon1 {
 
     private final static SingeTon1 INSTANCE = new SingeTon1();
 
-    public static SingeTon1 getINSTANCE() {
+    public static SingeTon1 getInstance() {
         return INSTANCE;
     }
 }

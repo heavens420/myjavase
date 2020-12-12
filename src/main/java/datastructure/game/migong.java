@@ -1,69 +1,88 @@
 package datastructure.game;
 
+import lombok.Data;
+
+/**
+ * 0 为路
+ * 1 为墙
+ * 2 通路
+ * 3 走过
+ */
+@Data
 public class migong {
+    private volatile static int x = 1;
+    private volatile static int y = 1;
+
     public static void main(String[] args) {
-        int i = 1;
-        int j = 1;
-        int[][] map = createMap(i,j);
+//        int x = 1;
+//        int y = 1;
+        int[][] map = createMap(x, y);
+        System.out.println("-------------------");
+        setWay(map, x, y);
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(map[i][j] + "\t");
+            }
+            System.out.println();
+        }
 
     }
-    public static int[][] createMap(int x,int y){
+
+    public static int[][] createMap(int x, int y) {
         int[][] array = new int[5][5];
 
         for (int i = 0; i < 5; i++) {
-            for (int j = 0;  j< 5; j++) {
+            for (int j = 0; j < 5; j++) {
                 array[i][j] = 0;
             }
         }
+
+        //设置墙
         for (int i = 0; i < 5; i++) {
             array[0][i] = 1;
             array[4][i] = 1;
             array[i][0] = 1;
             array[i][4] = 1;
             array[2][2] = 1;
+            array[3][2] = 1;
         }
+        //打印迷宫
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(array[i][j]+"\t");
+                System.out.print(array[i][j] + "\t");
             }
             System.out.println();
         }
-
-        while (x != 3 || y != 3){
-            toUp(array,x,y);
-            toRight(array,x,y);
-            toDown(array,x,y);
-            toLeft(array,x,y);
-        }
-
         return array;
     }
 
-    public static void toUp(int[][] arr,int i,int j){
-        if (arr[i][j] != 1){
-            arr[i][j] = 2;
-            j++;
-        }
-    }
 
-    public static void toRight(int[][] arr,int i,int j){
-        if (arr[i][j] != 1){
-            arr[i][j] = 2;
-            i++;
-        }
-    }
-
-    public static void toDown(int[][] arr,int i,int j){
-        if (arr[i][j] != 1){
-            arr[i][j] = 2;
-            j--;
-        }
-    }
-
-    public static void toLeft(int[][] arr,int i,int j){
-        if (arr[i][j] != 1){
-            arr[i][j] = 2;
-            i--;
+    public static boolean setWay(int[][] map, int x, int y) {
+        if (map[3][3] == 2) {
+            return true;
+        } else {
+            if ((map[x][y] == 0)) {
+                //假设该点可以走通
+                map[x][y] = 2;
+                if (setWay(map, x + 1, y)) {
+                    // 下
+                    return true;
+                } else if (setWay(map, x, y + 1)) {
+                    // 右
+                    return true;
+                } else if (setWay(map, x - 1, y)) {
+                    // 上
+                    return true;
+                } else if (setWay(map, x, y - 1)) {
+                    // 左
+                    return true;
+                } else {
+                    map[x][y] = 3;
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
     }
 }
