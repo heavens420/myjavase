@@ -12,7 +12,8 @@ public class expand {
         int[] arr = {1,2,3,4,12};
         int size = arr.length;
 
-        int[] array = add(arr, size, 3, 999);
+//        int[] array = add(arr, size, 3, 999);
+        int[] array = delete(arr, 2);
         System.out.println(Arrays.toString(array));
     }
 
@@ -21,7 +22,8 @@ public class expand {
         if (SIZE > size) {
             return array;
         }else {
-            int newSize = size + (size >> 1);
+//            int newSize = size + (size >> 1);
+            int newSize = size + 1;
             int[] newArray = new int[newSize];
             for (int i = 0; i < size; i++) {
                 newArray[i] = array[i];
@@ -43,5 +45,21 @@ public class expand {
         }
         array[index] = value;
         return array;
+    }
+
+    public static int[] delete(int[] arr,int index){
+        if (index > arr.length - 1 || index < 0){
+            throw new RuntimeException("删除索引越界");
+        }
+        for (int i = index;i < arr.length - 1;i++){
+            arr[i] = arr[i+1];
+        }
+//        arr[arr.length - 1] = 0;
+
+        // 新建数组，删除则数组长度减一
+        int[] arrNew = new int[arr.length - 1];
+        //将原数组拷贝到新建数组
+        System.arraycopy(arr,0,arrNew,0,arr.length - 1);
+        return arrNew;
     }
 }

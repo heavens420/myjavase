@@ -7,9 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dailiypractise" />
         <module name="MavenTest" />
         <module name="myjavase" />
+        <module name="dailiypractise" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />

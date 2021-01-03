@@ -14,7 +14,8 @@ public class copy {
 
         int[] arrCopy2 = Arrays.copyOf(arr, 8);
 
-        System.arraycopy(arr,0,arr2,3,arr.length);
+        // 源数组，源数组要复制的起始位置，目标数组，目标数组放置的起始位置，要复制源数组的长度
+        System.arraycopy(arr,2,arr2,3,arr.length-2);
 
         System.out.println("arrCopy: "+Arrays.toString(arrCopy));
         System.out.println("arrCopy2: "+Arrays.toString(arrCopy2));
