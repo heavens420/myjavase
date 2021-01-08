@@ -40,7 +40,6 @@ public class singleList {
 //        list.reverseLinkedList().show();
 //        list.reverseLinkdList2().show();
         list.getReversedList().show();
-        list.show();
     }
 
 
@@ -54,7 +53,7 @@ class LinkedList {
 
     Node head = new Node();
 
-    public Node getHead() {
+    private Node getHead() {
         return head;
     }
 
@@ -65,7 +64,7 @@ class LinkedList {
      */
     public void add(Node node) {
         //头节点不能动 创建一个头节点辅助节点  用于代替头节点遍历
-        Node temp = head;
+        Node temp = getHead();
         while (true) {
             if (temp.next != null) {
                 //如果没找到 temp 向后移
