@@ -1,4 +1,4 @@
-package com.zlx.singleton.lazy;
+package com.zlx.GOF.singleton.lazy;
 
 
 /**

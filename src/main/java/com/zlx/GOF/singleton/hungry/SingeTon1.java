@@ -1,4 +1,4 @@
-package com.zlx.singleton.hungry;
+package com.zlx.GOF.singleton.hungry;
 
 //饿汉式不存在线程安全问题
 public class SingeTon1 {

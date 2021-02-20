@@ -1,9 +1,9 @@
-package com.zlx.singleton;
+package com.zlx.GOF.singleton;
 
-import com.zlx.singleton.hungry.SingeTon1;
-import com.zlx.singleton.hungry.SingleTon2;
-import com.zlx.singleton.lazy.Single1;
-import com.zlx.singleton.lazy.Single3;
+import com.zlx.GOF.singleton.lazy.Single1;
+import com.zlx.GOF.singleton.hungry.SingeTon1;
+import com.zlx.GOF.singleton.hungry.SingleTon2;
+import com.zlx.GOF.singleton.lazy.Single3;
 
 import java.util.HashSet;
 import java.util.Set;

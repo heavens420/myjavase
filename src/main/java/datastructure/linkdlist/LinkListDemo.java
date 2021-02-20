@@ -1,10 +1,7 @@
 package datastructure.linkdlist;
 
-import com.sun.corba.se.impl.resolver.SplitLocalResolverImpl;
 
-import javax.swing.plaf.nimbus.AbstractRegionPainter;
-
-public class one {
+public class LinkListDemo {
     public static void main(String[] args) {
         MyNode node1 = new MyNode(1, "Black Ace", "黑桃A");
         MyNode node2 = new MyNode(2, "Black King", "黑桃K");
