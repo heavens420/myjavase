@@ -36,7 +36,7 @@ public class MapTest {
             System.out.println(key + ":" + value);
         }
 
-        //曾经最简单的方式 效率较低
+        //曾经 最简单的方式 效率较低
         for (String key : map.keySet()) {
             String value = map.get(key);
             System.out.println(key + ":" + value);

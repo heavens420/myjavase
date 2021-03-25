@@ -2,6 +2,11 @@ package com.zlx.javase;
 
 import java.util.Random;
 
+/**
+ * 随机数产生：
+ *  Random类
+ *  Math.random()方法
+ */
 public class RandomNumberDemo {
     public static void main(String[] args) {
         Random s = new Random();

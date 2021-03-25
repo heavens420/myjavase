@@ -12,9 +12,9 @@ import java.util.concurrent.TimeUnit;
 public class Test {
     public static void main(String[] args)  {
 //        HCompareSinge2();
-//        LCompareSinge1();
+        LCompareSinge1();
 //        LCompareSingle2();
-        LCompareSingle3();
+//        LCompareSingle3();
 
     }
 

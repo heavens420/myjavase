@@ -23,9 +23,9 @@ public class Demo2 {
         System.out.println();
 
         long start = System.currentTimeMillis();
-//        xuanze(array);
+        xuanze(array);
 //        selectSort(array);
-        test(array);
+//        test(array);
 //        test2(array);
         long end = System.currentTimeMillis();
         System.out.println(end - start);

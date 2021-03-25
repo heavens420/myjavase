@@ -35,7 +35,8 @@ public class T1 implements Callable {
         // 获取线程的返回值
         Future submit = executor.submit(t1);
         final Object result = submit.get();
-//        executor.shutdown();
+        System.out.println(result);
+        executor.shutdown();
 
         // 尝试取消执行的线程  但是只是尝试  不一定成功
         boolean cancel = submit.cancel(true);

@@ -17,6 +17,7 @@ public class Test {
         Double d = 0.00040000000000000001;
         Double ds = 1000000000000000000000001000000.00;
 
+        System.out.println(ds == ds - 1);
         Long i = Long.MAX_VALUE;
         System.out.println(i);
         Double d1 = i + d;

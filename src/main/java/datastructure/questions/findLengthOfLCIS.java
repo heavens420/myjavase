@@ -1,5 +1,9 @@
 package datastructure.questions;
 
+
+/**
+ * 寻找最长连续递增的数列的长度
+ */
 public class findLengthOfLCIS {
     public static void main(String[] args) {
 //        int[] array = {2,4,7,3,4,7,8,3,4,5,6,7,8};
