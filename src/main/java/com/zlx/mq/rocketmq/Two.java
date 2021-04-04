@@ -10,17 +10,21 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * @Author  Zhao LongLong
- * @Date    2020/8/28
+ * @Author Zhao LongLong
+ * @Date 2020/8/28
  * @Version 1.0
- * @Desc    发送异步消息
+ * @Desc 发送异步消息
  */
 public class Two {
-    public static void main(String[] args) throws Exception{
+
+        private final static String NAMESRV_ADDR = "192.168.123.205:9876";
+//    private final static String NAMESRV_ADDR = "175.24.188.154:9876";
+
+    public static void main(String[] args) throws Exception {
         // 实例化消息生产者producer
         DefaultMQProducer producer = new DefaultMQProducer("unique_group2");
         // 设置nameServer地址
-        producer.setNamesrvAddr("localhost:9876");
+        producer.setNamesrvAddr(NAMESRV_ADDR);
 
         //启动生产者实例
         producer.start();
@@ -33,17 +37,17 @@ public class Two {
         for (int i = 0; i < messageCount; i++) {
             final int index = i;
             //创建消息
-            Message message = new Message("topic2","tag2","key2",("message2"+i).getBytes("UTF-8"));
+            Message message = new Message("topic2", "tag2", "key2", ("message2" + i).getBytes("UTF-8"));
 
             producer.send(message, new SendCallback() {
                 @Override
                 public void onSuccess(SendResult sendResult) {
-                    System.out.printf("%-10d OK %s %n",index,sendResult.getMsgId());
+                    System.out.printf("%-10d OK %s %n", index, sendResult);
                 }
 
                 @Override
                 public void onException(Throwable throwable) {
-                    System.out.printf("%-10d Exception %s %n",index,throwable);
+                    System.out.printf("%-10d Exception %s %n", index, throwable);
                     throwable.printStackTrace();
                 }
             });

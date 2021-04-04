@@ -1,6 +1,6 @@
 package com.zlx.javase;
 
-import com.alibaba.fastjson.JSONObject;
+//import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.ImmutableList;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +12,8 @@ import java.util.Map;
 
 public class MyBuilder {
     public static void main(String[] args) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("h", "hh");
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("h", "hh");
 
 
         MyEntity myEntity = MyEntity.builder()

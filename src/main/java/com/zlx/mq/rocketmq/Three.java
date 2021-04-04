@@ -12,12 +12,15 @@ import java.util.List;
  * @Author Zhao LongLong
  * @Date 2020/8/28
  * @Version 1.0
- * @Desc  单向发送消息，不返回任何结果 只管发送 不管成不成功
+ * @Desc  单向发送消息，不返回任何结果 只管发送 不管成不成功  多用于 日志处理
  */
 public class Three {
+
+    private final static String NAMESRV_ADDR = "192.168.123.205:9876";
+
     public static void main(String[] args) throws Exception{
         DefaultMQProducer producer = new DefaultMQProducer("unique_group3");
-        producer.setNamesrvAddr("localhost:9876");
+        producer.setNamesrvAddr(NAMESRV_ADDR);
 
         producer.start();
 
