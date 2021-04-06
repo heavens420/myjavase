@@ -11,7 +11,7 @@ import org.apache.rocketmq.common.message.MessageExt;
 import java.util.List;
 
 /**
- *  顺序消费消息
+ *  消费顺序消息
  */
 public class Six {
 

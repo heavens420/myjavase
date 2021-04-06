@@ -7,6 +7,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public class Four {
         consumer.setNamesrvAddr(NAMESRV_ADDR);
 
         // 订阅消息 订阅topic1的所有消息   参数 topic,tag
-        consumer.subscribe("topic3","*");
+        consumer.subscribe("topic1","*");
 
         // 设置消费模式  默认为负载均衡模式  可选发布订阅模式
         consumer.setMessageModel(MessageModel.BROADCASTING);
@@ -37,7 +38,12 @@ public class Four {
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
-                System.out.printf("%s Receive new Message: %s %n",list);
+                for (MessageExt msg:list) {
+//                    long time = Instant.now().toEpochMilli() - msg.getStoreTimestamp();
+                    long time = msg.getBornTimestamp() - msg.getStoreTimestamp();
+//                    System.out.printf("%s Receive new Message: %s %n",list);
+                    System.out.printf("消息ID:%s,延迟时间:%d ms %n",msg.getMsgId(),time);
+                }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
         });
