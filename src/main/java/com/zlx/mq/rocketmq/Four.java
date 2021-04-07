@@ -1,6 +1,7 @@
 package com.zlx.mq.rocketmq;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.MessageSelector;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
@@ -29,7 +30,13 @@ public class Four {
         consumer.setNamesrvAddr(NAMESRV_ADDR);
 
         // 订阅消息 订阅topic1的所有消息   参数 topic,tag
-        consumer.subscribe("topic1","*");
+        consumer.subscribe("topic10","*");
+
+        // 通过 tag 筛选特定消息
+//        consumer.subscribe("topic8","tag8 || tag9 || tag10");
+
+        // 通过sql表达式筛选特定消息 进行消费  i 为生产者设置的消息名字
+//        consumer.subscribe("topic9",MessageSelector.bySql("i > 5"));
 
         // 设置消费模式  默认为负载均衡模式  可选发布订阅模式
         consumer.setMessageModel(MessageModel.BROADCASTING);
@@ -42,7 +49,7 @@ public class Four {
 //                    long time = Instant.now().toEpochMilli() - msg.getStoreTimestamp();
                     long time = msg.getBornTimestamp() - msg.getStoreTimestamp();
 //                    System.out.printf("%s Receive new Message: %s %n",list);
-                    System.out.printf("消息ID:%s,延迟时间:%d ms %n",msg.getMsgId(),time);
+                    System.out.printf("消息ID:%s,消息tag:%s,延迟时间:%d ms %n",msg.getMsgId(),msg.getTags(),time);
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }
