@@ -1,6 +1,14 @@
 package com.zlx;
 
+import javax.swing.*;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.Dictionary;
+import java.util.Hashtable;
+import java.util.Optional;
+import java.util.StringJoiner;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * @Author Zhao LongLong
@@ -14,6 +22,11 @@ import java.math.BigDecimal;
 
 public class Test {
     public static void main(String[] args) {
+        testOptional();
+//        testStringJoiner();
+    }
+
+    public static void testDuble(){
         Double d = 0.00040000000000000001;
         Double ds = 1000000000000000000000001000000.00;
 
@@ -36,5 +49,32 @@ public class Test {
             BigDecimal decimal = new BigDecimal(s);
             System.out.println(decimal.toPlainString());
         }
+    }
+
+    public static void testOptional(){
+        String str = "";
+
+        // str 非空 同样会执行 orElse()方法
+        Optional.ofNullable(str).orElse(sayHello());
+//        Optional.ofNullable(str).orElseThrow(new NullPointerException(""))
+    }
+
+    public static String sayHello(){
+        System.out.println("hello");
+        return "hello";
+    }
+
+    public static void testIf(){
+//        Dictionary optional = new Hashtable<String,Action>();
+//
+//        optional["11"] = () ->{
+//
+//        };
+    }
+
+    public static void testStringJoiner(){
+        StringJoiner joiner = new StringJoiner(",","[","]");
+        IntStream.range(1,10).forEach(i -> joiner.add(i+""));
+        System.out.println(joiner.toString());
     }
 }
