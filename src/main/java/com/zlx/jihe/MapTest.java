@@ -46,7 +46,7 @@ public class MapTest {
         //通过 foreach和lambda表达式遍历
         map.forEach((key, value) -> System.out.println(key + " " + value));
 
-        //通过遍历map.entryset 遍历map
+        //通过遍历map.entryset+stream 遍历map
         map.entrySet().forEach(entry -> System.out.println(entry.getKey() + "--" + entry.getValue()));
 
         List<String> list = new ArrayList<String>(Arrays.asList("ff", "tt"));
@@ -75,4 +75,26 @@ public class MapTest {
         System.out.println(sortedMap);
     }
 
+    /**
+     * 遍历集合中的map 并将map的值存入新的集合
+     */
+    public static void foreachList(){
+        List<Map<String, String>> list = new ArrayList<>();
+        Map mapA = new HashMap<String, String>();
+        mapA.put("A", "A1");
+
+        Map mapB = new HashMap<String, String>();
+        mapB.put("B", "B1");
+
+        list.add(mapB);
+        list.add(mapA);
+
+        List newList = new ArrayList();
+
+        list.forEach(it ->{
+            it.entrySet().stream().forEach(m -> newList.add(m.getValue()));
+        });
+
+        newList.forEach(System.out::println);
+    }
 }
