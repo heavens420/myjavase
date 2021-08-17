@@ -12,9 +12,9 @@ import static com.zlx.netty.nio.ByteBufferUtil.debugAll;
 @Slf4j
 public class Demo1 {
     public static void main(String[] args) {
-//        ReadFiles();
+        ReadFiles();
 //        ReadAndWrite();
-        ReadAndWrite2();
+//        ReadAndWrite2();
     }
 
     /**
@@ -23,7 +23,7 @@ public class Demo1 {
     public static void ReadFiles() {
         try {
             // file chanel
-            FileChannel channel = new FileInputStream("C:\\Users\\420\\Desktop\\success.txt").getChannel();
+            FileChannel channel = new FileInputStream("C:\\Users\\420\\Desktop\\test.txt").getChannel();
             // 缓冲区 一次最多读取10个字节
             final ByteBuffer buffer = ByteBuffer.allocate(10);
             while (true) {
@@ -46,8 +46,9 @@ public class Demo1 {
 //                    final int write = channel.write(buffer);
                     log.info("实际读取的字节数:{}", ((char) b));
                 }
-                // 切换为写模式
+                // 切换为写模式，
                 buffer.clear();
+//                debugAll(buffer);
             }
 
         } catch (FileNotFoundException e) {
@@ -80,7 +81,7 @@ public class Demo1 {
     }
 
     /**
-     * 设置标志位 并从标志位开始重新读buffer
+     * 设置标志位 reset()会将 position置为标志位的值 并从标志位开始重新读buffer
      * get(index) 不会移动position指针
      * get()会移动position
      */

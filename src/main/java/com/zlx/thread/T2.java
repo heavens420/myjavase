@@ -34,6 +34,10 @@ public class T2 implements Callable<Integer> {
         FutureTask<Integer> task = new FutureTask(t2);
         Future<Integer> fu = (Future<Integer>) executor.submit(task);
         System.out.println(fu.get());
+
     }
+
+
+
 
 }

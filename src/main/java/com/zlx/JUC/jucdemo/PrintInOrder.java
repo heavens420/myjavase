@@ -29,12 +29,9 @@ public class PrintInOrder {
                     state++;
                     System.out.print(value);
                 }
-
             } finally {
                 lock.unlock();
             }
-
-
         }
     }
 

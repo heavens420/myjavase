@@ -1,16 +1,14 @@
 package com.zlx.java8features;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
  * Java 8 新特性
  *
  */
-public class stream01 {
+public class stream01 implements RandomAccess {
     public static void main(String[] args) {
         //Optionals : 防止空指针异常
 
@@ -63,7 +61,7 @@ public class stream01 {
         Optional<String> reduce1 = stringList.stream().reduce((s1,s2) -> s1+"-"+s2);
         reduce1.ifPresent(System.out::println);
 
-        //字符串连接
+        //字符串连接x`
         String con = Stream.of("s","gg","erwr","fa").reduce("",String::concat);
         //求最小值
 //        double minValue = Stream.of(1,3,5,-3,-5.3,-43,-43.23,5.43).reduce(Double.MAX_VALUE,Integer::min);

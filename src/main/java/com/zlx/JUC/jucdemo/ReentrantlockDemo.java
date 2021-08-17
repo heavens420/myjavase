@@ -1,4 +1,4 @@
-package com.zlx.JUC;
+package com.zlx.JUC.jucdemo;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

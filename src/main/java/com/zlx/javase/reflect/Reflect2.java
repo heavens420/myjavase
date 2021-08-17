@@ -32,10 +32,11 @@ public class Reflect2 {
 
         // 1、通过newInstance()创建对象
         EasyExcelTest instance = ((EasyExcelTest) cls1.newInstance());
-        System.out.println(instance);
+        System.out.println(instance.getClass().getName());
 
         // 2、通过通过构造器和newInstance()
         EasyExcelTest instance2 = ((EasyExcelTest) cls2.getConstructor().newInstance());
-        System.out.println(instance2);
+        System.out.println(instance2.getClass());
+
     }
 }

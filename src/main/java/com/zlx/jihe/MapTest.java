@@ -2,11 +2,45 @@ package com.zlx.jihe;
 
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MapTest {
 
 
     public static void main(String[] args) {
+       foreachList();
+    }
+
+    /**
+     * 遍历集合中的map 并将map的值存入新的集合
+     */
+    public static void foreachList(){
+        List<Map<String, String>> list = new ArrayList<>();
+        Map mapA = new HashMap<String, String>();
+        mapA.put("A", "A1");
+
+        Map mapB = new HashMap<String, String>();
+        mapB.put("B", "B1");
+
+        list.add(mapB);
+        list.add(mapA);
+
+//        List newList = new ArrayList();
+//
+//        list.forEach(it ->{
+//            it.entrySet().stream().forEach(m -> newList.add(m.getValue()));
+//        });
+
+        final List<String> listStream = list.stream().flatMap(m -> m.values().stream()).collect(Collectors.toList());
+
+//        newList.forEach(System.out::println);
+
+        System.out.println(listStream);
+    }
+
+    public static void testStream(){
         Map<String, String> map = new HashMap<>(8);
         map.put("aa", "3");
         map.put("cc", "1");
@@ -73,28 +107,5 @@ public class MapTest {
         Map sortedMap = new LinkedHashMap(8);
         map1.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEachOrdered(x->sortedMap.put(x.getKey(),x.getValue()));
         System.out.println(sortedMap);
-    }
-
-    /**
-     * 遍历集合中的map 并将map的值存入新的集合
-     */
-    public static void foreachList(){
-        List<Map<String, String>> list = new ArrayList<>();
-        Map mapA = new HashMap<String, String>();
-        mapA.put("A", "A1");
-
-        Map mapB = new HashMap<String, String>();
-        mapB.put("B", "B1");
-
-        list.add(mapB);
-        list.add(mapA);
-
-        List newList = new ArrayList();
-
-        list.forEach(it ->{
-            it.entrySet().stream().forEach(m -> newList.add(m.getValue()));
-        });
-
-        newList.forEach(System.out::println);
     }
 }

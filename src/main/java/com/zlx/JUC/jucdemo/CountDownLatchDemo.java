@@ -1,4 +1,6 @@
-package com.zlx.JUC;
+package com.zlx.JUC.jucdemo;
+
+import com.zlx.JUC.CountryEnum;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -32,7 +34,7 @@ public class CountDownLatchDemo {
             new Thread(() -> {
                 System.out.println(Thread.currentThread().getName()+"被灭");
                 latch.countDown();
-            },CountryEnum.forName(i).getName()).start();
+            }, CountryEnum.forName(i).getName()).start();
         }
         latch.await();
         System.out.println(Thread.currentThread().getName()+"秦国统一天下");

@@ -22,8 +22,18 @@ import java.util.stream.Stream;
 
 public class Test {
     public static void main(String[] args) {
-        testOptional();
+//        testOptional();
 //        testStringJoiner();
+//        boolean ss = getBoolean();
+//        Boolean ss2 = getBoolean();
+//        System.out.println(ss);
+//        System.out.println(ss2);
+
+        // 1 = 0000 0001
+        // -1 = 1000 0001
+        // -2 = 1000 0010
+        System.out.println(1L << -129);
+        System.out.println(1L << -1);
     }
 
     public static void testDuble(){
@@ -76,5 +86,9 @@ public class Test {
         StringJoiner joiner = new StringJoiner(",","[","]");
         IntStream.range(1,10).forEach(i -> joiner.add(i+""));
         System.out.println(joiner.toString());
+    }
+
+    public static Boolean getBoolean(){
+        return null;
     }
 }

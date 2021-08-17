@@ -24,7 +24,7 @@ public class Demo4 {
     }
 
 
-    public static void shellSort(@org.jetbrains.annotations.NotNull int[] array) {
+    public static void shellSort(int[] array) {
         int temp;
         int count = 0;
         //每次步长为原来的1/2 两两分组  控制排序趟数

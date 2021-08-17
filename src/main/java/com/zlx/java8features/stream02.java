@@ -19,7 +19,7 @@ public class stream02 {
         //mapToDoubble mapToLong 等类似
         Stream.of("fsf","fsf").mapToInt(String::length).forEach(System.out::println);
 
-        Stream.of("a-b-c-d","e-f-g").flatMap(s -> Stream.of(s.split("-"))).forEach(System.out::println);
+        Stream.of("a-b-c-d","e-f-g","","").flatMap(s -> Stream.of(s.split("-"))).forEach(System.out::println);
 
         //限制输出数量
         Stream.of(12,34,65,78,4353,242).limit(2).forEach(System.out::println);
@@ -80,8 +80,8 @@ public class stream02 {
 
     public static void inForEach() {
         List<Integer> ints = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        ints.stream().forEach(i -> {
-            if (i.intValue() % 2 == 0) {
+        ints.forEach(i -> {
+            if (i % 2 == 0) {
                 System.out.println("i is even");
             } else {
                 System.out.println("i is old");
@@ -91,8 +91,8 @@ public class stream02 {
 
     public static void inForeach2() {
         List<Integer> ints = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        Stream<Integer> evenIntegers = ints.stream().filter(i -> i.intValue() % 2 == 0);
-        Stream<Integer> oddIntegers = ints.stream().filter(i -> i.intValue() % 2 != 0);
+        Stream<Integer> evenIntegers = ints.stream().filter(i -> i % 2 == 0);
+        Stream<Integer> oddIntegers = ints.stream().filter(i -> i % 2 != 0);
 
         evenIntegers.forEach(i -> System.out.println("i is even"));
         oddIntegers.forEach(i -> System.out.println("i is old"));

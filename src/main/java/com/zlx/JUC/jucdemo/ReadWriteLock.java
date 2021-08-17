@@ -1,7 +1,5 @@
-package com.zlx.JUC;
+package com.zlx.JUC.jucdemo;
 
-import jdk.nashorn.internal.runtime.ECMAException;
-import org.apache.commons.lang3.ThreadUtils;
 
 import java.util.HashMap;
 import java.util.Map;

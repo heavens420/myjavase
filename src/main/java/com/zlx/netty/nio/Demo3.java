@@ -17,11 +17,11 @@ import static com.zlx.netty.nio.ByteBufferUtil.debugAll;
 public class Demo3 {
     public static void main(String[] args) throws IOException {
         batchRead();
-        batchWrite();
+//        batchWrite();
     }
 
     public static void batchRead() throws FileNotFoundException {
-        String file = "src/main/java/com/zlx/netty/nio/ByteBufferUtil.java";
+        String file = "C:\\Users\\420\\Desktop\\test.txt";
         try (FileChannel channel = new RandomAccessFile(file, "rw").getChannel()) {
             // 将文件存入多个buffer
             ByteBuffer buffer1 = ByteBuffer.allocate(10);
@@ -35,9 +35,10 @@ public class Demo3 {
             buffer3.flip();
 
 
-            debugAll(buffer1);
-            debugAll(buffer2);
-            debugAll(buffer3);
+//            debugAll(buffer1);
+//            debugAll(buffer2);
+//            debugAll(buffer3);
+            System.out.println("new String(buffer1.array(),0,buffer1.limit()) = " + new String(buffer1.array(), 0, buffer1.limit()));
         } catch (IOException e) {
             e.printStackTrace();
         }

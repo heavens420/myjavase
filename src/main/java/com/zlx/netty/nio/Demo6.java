@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -16,8 +17,8 @@ public class Demo6 {
     public  static AtomicInteger fileCount = new AtomicInteger();
 
     public static void main(String[] args) throws IOException {
-//        testWalkFileTree();
-        countFiles();
+        testWalkFileTree();
+//        countFiles();
     }
 
     public static void testWalkFileTree() throws IOException {
@@ -26,7 +27,11 @@ public class Demo6 {
                     @Override
                     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
                         dirCount.incrementAndGet();
-                        log.info("dir==>{}",dir);
+                        StringJoiner joiner = new StringJoiner("-");
+                        for (int i = 0; i < dirCount.intValue(); i++) {
+                            joiner.add("-");
+                        }
+                        log.info("dir==>{}{}",dir,joiner);
                         return super.preVisitDirectory(dir, attrs);
                     }
 
