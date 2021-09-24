@@ -60,8 +60,6 @@ public class IoDemo {
             writer.close();
             reader.close();
             System.out.println("copy successful");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

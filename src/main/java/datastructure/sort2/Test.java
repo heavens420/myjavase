@@ -1,6 +1,7 @@
 package datastructure.sort2;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.Map.Entry;
 
 public class Test {
     public static void main(String[] args) {
@@ -8,7 +9,8 @@ public class Test {
 //        maopao();
 //        charu();
 //        paixu();
-        xier();
+//        xier();
+        charupaixu();
     }
 
     public static void paixu() {
@@ -108,7 +110,49 @@ public class Test {
         }
     }
 
-    public static void jiandan(){
+    public static void jiandan() {
 
+    }
+
+    public static void kuaisu() {
+
+    }
+
+    /**
+     * 随机输入n组 两两一组数的数  按每组数的第一个值升序排序，第一个相同的按第二个数升序排序
+     */
+    public static void charupaixu() {
+//        Scanner scanner = new Scanner(System.in);
+        try {
+//            int count = scanner.nextInt();
+//            int[][] array = new int[count][];
+            int[][] array = new int[][]{{20, 3}, {32, 2}, {20, 6}, {3, 4}, {5, 1}, {2, 1}, {2, 4444}, {20, 55}};
+
+//            while (count-- > 0) {
+//                int[] arr = new int[2];
+//                arr[0] = scanner.nextInt();
+//                arr[1] = scanner.nextInt();
+//                array[count] = arr;
+//            }
+            for (int i = 1; i < array.length; i++) {
+                int[] currentArray = array[i];
+                int currentIndex = i;
+                while (currentIndex > 0 && (currentArray[0] < array[currentIndex - 1][0] || currentArray[0] == array[currentIndex - 1][0] && currentArray[1] < array[currentIndex - 1][1])) {
+                    array[currentIndex] = array[currentIndex - 1];
+                    currentIndex--;
+                }
+                array[currentIndex] = currentArray;
+                int finalCurrentIndex = currentIndex;
+                Arrays.stream(array).forEach(ints -> System.out.println("第" + finalCurrentIndex + "次排序后：" + Arrays.toString(ints)));
+                System.out.println("--------------------");
+            }
+            Arrays.stream(array).forEach(ints -> {
+                Arrays.stream(ints).forEach(value -> System.out.print(value + "\t"));
+                System.out.println();
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("输入有误");
+        }
     }
 }

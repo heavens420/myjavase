@@ -1,5 +1,7 @@
 package com.zlx;
 
+import lombok.var;
+
 import javax.swing.*;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -32,8 +34,17 @@ public class Test {
         // 1 = 0000 0001
         // -1 = 1000 0001
         // -2 = 1000 0010
-        System.out.println(1L << -129);
-        System.out.println(1L << -1);
+//        System.out.println(1L << -129);
+//        System.out.println(1L << -1);
+        testCast();
+    }
+
+    public static void testCast(){
+        Object[] array = {Integer.MAX_VALUE * 100, Integer.MAX_VALUE / 200, Integer.MAX_VALUE / 300,new int[]{},"999"};
+        String ss  = array[0].toString();
+        System.out.println(ss);
+        Long lon = Long.parseLong(ss);
+        System.out.println(lon);
     }
 
     public static void testDuble(){
@@ -91,4 +102,6 @@ public class Test {
     public static Boolean getBoolean(){
         return null;
     }
+
+
 }

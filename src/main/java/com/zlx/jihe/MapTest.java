@@ -10,7 +10,8 @@ public class MapTest {
 
 
     public static void main(String[] args) {
-       foreachList();
+//       foreachList();
+       testStream();
     }
 
     /**
@@ -102,7 +103,8 @@ public class MapTest {
         map1.put("q",12);
         map1.put("w",34);
         map1.put("i",9);
-        map1.put("r",2);
+        map1.put("r",20);
+        map1.put("re",2);
         //必须用LikedHashMap才能对Integer类型排序，String类型皆可
         Map sortedMap = new LinkedHashMap(8);
         map1.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEachOrdered(x->sortedMap.put(x.getKey(),x.getValue()));
