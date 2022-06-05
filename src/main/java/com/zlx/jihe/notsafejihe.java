@@ -8,6 +8,10 @@ public class notsafejihe {
     //解决Arraylist 线程不安全方案 HashSet 也同理
 
     public static void main(String[] args) {
+      testIteratorList();
+    }
+
+    public void test(){
         //方案一：vector
         List<Integer> list =  new Vector<Integer>();
         //方案二：collections工具类的 synchronizedList（）方法
@@ -22,13 +26,25 @@ public class notsafejihe {
 
         String s = null;
         try {
-        System.out.println(s.length());
+            System.out.println(s.length());
         }catch (Exception e){
             System.out.println("err");
         }
 //        new Thread(()->{
 //            System.out.println("hello");
 //        },"aa").start();
+    }
 
+    public static void testIteratorList() {
+        List<Integer> list = Collections.synchronizedList(new ArrayList<>(Arrays.asList(1, 2, 3)));
+        Iterator<Integer> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            format(iterator.next());
+        }
+        list.forEach(System.out::println);
+    }
+
+    public static void format(Integer value){
+        value += 100;
     }
 }

@@ -1,5 +1,7 @@
 package com.zlx.GOF.singleton;
 
+import com.zlx.GOF.singleton.hungry.DCL;
+import com.zlx.GOF.singleton.hungry.StaticInnerClass;
 import com.zlx.GOF.singleton.lazy.Single1;
 import com.zlx.GOF.singleton.hungry.SingeTon1;
 import com.zlx.GOF.singleton.hungry.SingleTon2;
@@ -12,12 +14,23 @@ import java.util.concurrent.TimeUnit;
 public class Test {
     public static void main(String[] args)  {
 //        HCompareSinge2();
-        LCompareSinge1();
+//        LCompareSinge1();
 //        LCompareSingle2();
 //        LCompareSingle3();
+        threadSingeTonTest();
 
     }
 
+    public static void threadSingeTonTest(){
+        for (int i = 0; i < 10000; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    StaticInnerClass.getInstance();
+                }
+            }).start();
+        }
+    }
 
     public static void HCompareSingleTon1(){
         SingeTon1 instance = SingeTon1.getInstance();

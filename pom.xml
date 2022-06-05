@@ -13,14 +13,36 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>15</source>
-                    <target>15</target>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
     <dependencies>
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>7.17.2</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>7.12.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.79</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
+        </dependency>
       <!--  <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -103,7 +125,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
+            <version>1.18.24</version>
         </dependency>
         <!--easyexcel 依赖 easy excel也依赖poi 故注释掉poi-->
         <dependency>
@@ -163,11 +185,18 @@
             <version>2.6.4</version>
         </dependency>
 
-<!--okhttp-->
+<!--okhttp3-->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.6.0</version>
+            <version>4.9.3</version>
+        </dependency>
+
+<!--okhttps-->
+        <dependency>
+            <groupId>com.ejlchina</groupId>
+            <artifactId>okhttps</artifactId>
+            <version>3.5.0</version>
         </dependency>
 
         <dependency>

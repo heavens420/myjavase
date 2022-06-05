@@ -8,6 +8,11 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import static com.zlx.netty.nio.ByteBufferUtil.debugAll;
 
+/**
+ * flip:切换为读模式 此时position会置为起始位置 limit置为读取结果的最后一个索引位置
+ * clear：重新写 清空buffer position置为0 limit置为capacity
+ * compact：写模式 buffer中有一部分数据不想清空 而想接着写 此时会把buffer中已经读的数据清空 未读的移动到最前面最后一个数据位置为position limit为capacity
+ */
 
 @Slf4j
 public class Demo1 {
@@ -23,7 +28,7 @@ public class Demo1 {
     public static void ReadFiles() {
         try {
             // file chanel
-            FileChannel channel = new FileInputStream("C:\\Users\\420\\Desktop\\test.txt").getChannel();
+            FileChannel channel = new FileInputStream("C:\\workspace\\java\\myproject\\myjavase\\word.txt").getChannel();
             // 缓冲区 一次最多读取10个字节
             final ByteBuffer buffer = ByteBuffer.allocate(10);
             while (true) {
