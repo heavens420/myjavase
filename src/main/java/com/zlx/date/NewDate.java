@@ -59,8 +59,7 @@ public class NewDate {
             System.out.println(s);
         });
 
-        for (Integer i :list
-             ) {
+        for (Integer i :list) {
             i *= i;
             System.out.println(i);
         }
