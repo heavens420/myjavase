@@ -28,7 +28,7 @@ public class stream01 implements RandomAccess {
         //stream():表示能应用在一组元素上一次执行的操作序列  分为中间操作(返回的是stream本身)和最终操作 (返回值是特定的计算结果)
 
         //此处 List<String> 要加泛型  否则 下面filter 无法调用 startWith()等方法
-        List<String> stringList = new ArrayList(Arrays.asList("Da","g","d","Fa","fsf","fs"));
+        List<String> stringList = new ArrayList<>(Arrays.asList("Da","g","d","Fa","fsf","fs"));
         //过滤以 'f'开头的字符串
         stringList.stream().filter((s) -> s.startsWith("f")).forEach(System.out::println);
         //过滤以'f'开头的字符串并将其排序
