@@ -34,8 +34,15 @@ public class stream02 {
         User u3 = new User(3,"jsj");
         User u4 = new User(303,"jsj");
 
-        Stream.of(u1,u2,u3,u4).peek(e -> e.setId(e.getId()+1)).peek(e ->e.setName(e.getName()+"ll")).forEach(System.out::println);
-
+        List<User> users = new ArrayList<User>();
+        System.out.println("peek-------p--------------------------------");
+        users.add(u1);
+        users.add(u2);
+        users.add(u3);
+        users.add(u4);
+        users.stream().peek(user -> user.setId(user.getId() + 100)).forEach(System.out::println);
+//        Stream.of(u1,u2,u3,u4).peek(e -> e.setId(e.getId()+1)).peek(e ->e.setName(e.getName()+"ll")).forEach(System.out::println);
+        System.out.println("peek-------p--------------------------------");
         //跳过前两个数不输出 与limit 对应
         Stream.of(12,34,56).skip(2).forEach(System.out::println);
 
