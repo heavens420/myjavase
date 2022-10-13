@@ -17,3 +17,4 @@ target/classes/lambdaTest/ForEach.class
 target/generated-sources/
 target/maven-status/
 !/.idea/
+!/.idea/libraries/
