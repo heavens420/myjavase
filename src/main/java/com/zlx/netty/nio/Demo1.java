@@ -28,7 +28,7 @@ public class Demo1 {
     public static void ReadFiles() {
         try {
             // file chanel
-            FileChannel channel = new FileInputStream("C:\\workspace\\java\\myproject\\myjavase\\word.txt").getChannel();
+            FileChannel channel = new FileInputStream(".\\note-2020-08-25.txt").getChannel();
             // 缓冲区 一次最多读取10个字节
             final ByteBuffer buffer = ByteBuffer.allocate(10);
             while (true) {

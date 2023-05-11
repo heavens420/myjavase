@@ -1,10 +1,13 @@
 package com.zlx.java8features;
 
+import com.alibaba.fastjson.JSONObject;
+import joptsimple.util.KeyValuePair;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.apache.http.NameValuePair;
 
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
+import java.lang.reflect.Field;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -14,17 +17,19 @@ import java.util.stream.Stream;
  */
 @Slf4j
 public class LambdaTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IllegalAccessException {
 //        getMinAndMaxAndAvgValue();
 //        getMinAndMaxAndAvgValue2();
 //        getMaxAndMinAndAvgValue3();
-        getMaxAndMinAndAvgValue4();
+//        getMaxAndMinAndAvgValue4();
 //        getSum();
 //        concatItem();
 //        matchItem();
 //        findItem();
 //        outputItem();
 //        randomNums();
+//        testMap2List();
+     forEachObject();
     }
 
     /**
@@ -169,4 +174,55 @@ public class LambdaTest {
     }
 
 
+    public static void testMap2List() throws IllegalAccessException {
+        Map<String,String> map  = new HashMap<String,String>();
+        map.put("123", "333");
+        User user = new User(444, null);
+        List<Map<String, String>> mapList = List.of(map);
+        Object[] objects = map.entrySet().toArray();
+
+        Field[] fields = user.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            String name = field.getName();
+            Object value = field.get(user);
+            log.info("before {}:{}", name,value);
+            if (value == null) {
+                field.set(user, "");
+                value = field.get(user);
+            }
+            log.info("after {}:{}", name,value);
+        }
+
+
+//        System.out.println(Arrays.toString(objects));
+//        System.out.println(mapList);
+    }
+
+    public static void forEachObject() {
+        User user = new User(444, null);
+
+        // 当属性为null时  改属性将被丢弃
+        String jsonString = JSONObject.toJSONString(user);
+        System.out.println(jsonString);
+
+        Map<String,Object> map = JSONObject.parseObject(jsonString, Map.class);
+        System.out.println(map);
+//        Map<String, Object> collect = map.entrySet().stream().map(entry -> {
+//            if (entry.getValue().equals("333")) {
+//                System.out.println("----------------"+entry.getValue());
+//                entry.setValue("666");
+//            }
+//            return entry;
+//        }).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,(k1,k2) -> k1,HashMap::new));
+
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            if (entry.getValue() == null) {
+                entry.setValue("666");
+            }
+        }
+        map.forEach((k,v) -> {
+            System.out.println(k+":"+v);
+        });
+    }
 }

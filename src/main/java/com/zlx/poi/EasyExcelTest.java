@@ -3,9 +3,14 @@ package com.zlx.poi;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -17,13 +22,16 @@ public class EasyExcelTest {
 
     private String book;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Map<String, String> map = new HashMap<>(8);
 
         String templateFill = "C:\\Users\\420\\Downloads\\Documents/template-fill-duixiang.xlsx";
         String templateFillList = "C:\\Users\\420\\Downloads\\Documents/template-fill-list.xlsx";
         String path = "C:\\Users\\420\\Downloads\\Documents/easyexcel.xlsx";
+        String template = "excelTemplate/write_template.xlsx";
+        String template1 = "src/main/resources/excelTemplate/write_template.xlsx";
+        String outPut = "src/main/resources/excelOutPut/result1.xlsx";
         //根据对象导出数据
 //        EasyExcel.write(path,DataModel.class).sheet("model2").doWrite(writeData());
 
@@ -43,10 +51,10 @@ public class EasyExcelTest {
 //        write4(path);
 //        write5(path);
 //        write6(path);
-//        write8(path,template);
-//        write9(path,templateFill);
+        write8(outPut,template1);
+//        write9(outPut,template1);
 //        write10(path,templateFill);
-        write11(path,templateFillList);
+//        write11(path,templateFillList);
     }
 
     /**
@@ -70,7 +78,7 @@ public class EasyExcelTest {
      *
      * @param path
      */
-    public static void write1(String path) {
+    public static void write1(HttpServletResponse response, String path) throws IOException {
         Set exinclude = new HashSet();
         exinclude.add("date");
         // 仅排除date字段
@@ -81,6 +89,13 @@ public class EasyExcelTest {
         // 仅导出date字段
         EasyExcel.write(path, DataModel.class).includeColumnFiledNames(include).sheet(0).doWrite(writeData());
 
+        // 导出
+        response.setContentType("application/vnd.ms-excel");
+        response.setCharacterEncoding("utf-8");
+//        String downloadFileName = URLEncoder.encode(path, StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+        String downloadFileName = path;
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + downloadFileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(),DataModel.class).sheet("fileName").doWrite(writeData());
     }
 
     /**
@@ -202,7 +217,8 @@ public class EasyExcelTest {
      * @param fileName
      * @param template
      */
-    public static void write8(String fileName,String template){
+    public static void write8(String fileName,String template) throws IOException {
+        Resource resource = new ClassPathResource(template);
         EasyExcel.write(fileName,DataModel.class).withTemplate(template).sheet(0).doWrite(writeData());
     }
 

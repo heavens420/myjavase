@@ -14,11 +14,13 @@ public class Array2List {
 
     public static void main(String[] args) {
 //        array2list1();
-        array2list2();
-        array2list3();
+//        array2list2();
+//        array2list3();
         double a = 25/2.0;  // 12.5
 //        double a = 25/2;  // 12
-        System.out.println(a);
+//        System.out.println(a);
+
+        orderListByList();
     }
 
 
@@ -45,5 +47,24 @@ public class Array2List {
         ArrayList arrayList = new ArrayList<Integer>(array.length);
         Collections.addAll(arrayList, array);
         arrayList.forEach(System.out::println);
+    }
+
+    public static void orderListByList() {
+        List<String> list = new ArrayList<>(Arrays.asList("a12", "p9", "b34", "d3"));
+        List<String> orderRule = new ArrayList<>(Arrays.asList("b34", "p9", "a12", "d3"));
+
+        list.sort(((o1, o2) -> {
+            int io1 = orderRule.indexOf(o1);
+            int io2 = orderRule.indexOf(o2);
+            if (io1 != -1) {
+                io1 = list.size() - io1;
+            }
+            if (io2 != -1) {
+                io2 = list.size() - io2;
+            }
+            return  io2 - io1;
+        }));
+
+        System.out.println(list);
     }
 }

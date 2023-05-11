@@ -1,9 +1,11 @@
 package com.zlx;
 
+import cn.hutool.core.map.MapUtil;
 import com.alibaba.fastjson.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -37,7 +39,31 @@ public class Test {
         map.put("12a", "ffaw");
         map.put("1223r", "ffafgw");
 
-        System.out.println(JSONObject.toJSONString(map));
+        String fsafasd = map.get("fsafasd");
+
+        Integer sdsd = MapUtil.getInt(map, "sdsd");
+        System.out.println(sdsd);
+
+        if (true || false) {
+            System.out.println("w3232");
+        }
+
+//        System.out.println(JSONObject.toJSONString(map));
+
+//        int a = 1;
+//
+//        try {
+//            System.out.println(a / 0);
+//        } catch (Exception e) {
+//            System.out.println("-------------getMessage-------------------");
+//            System.out.println(e.getMessage());
+//                System.out.println("-------------getStackTrace-------------------");
+//            System.out.println(Arrays.toString(e.getStackTrace()));
+//            System.out.println("---------getCause-----------------------");
+//            e.getCause();
+//            System.out.println("----------------printStackTrace----------------");
+//            e.printStackTrace();
+//        }
     }
 
     public static void testCast() {
@@ -131,5 +157,35 @@ public class Test {
         for (int i = 0; i < n; i++) {
 
         }
+    }
+
+    public static void forMap(){
+        List<Map<String,Object>> list = new ArrayList<>();
+        Map<String,Object> map = new HashMap<>();
+        map.put("dicId","aaa");
+        map.put("dicName","钢材");
+        map.put("dicDes","钢材1号");
+        list.add(map);
+
+        map = new HashMap<>();
+        map.put("dicId","bbb");
+        map.put("dicName","钢筋");
+        map.put("dicDes","钢筋1号");
+        list.add(map);
+        map = new HashMap<>();
+        map.put("dicId","aaa");
+        map.put("dicName","钢筋");
+        map.put("dicDes","钢筋2号");
+        list.add(map);
+
+        map = new HashMap<>();
+        map.put("dicId","bbb");
+        map.put("dicName","河沙");
+        map.put("dicDes","河沙1号");
+        list.add(map);
+//        Map<String, List<Map<String, Object>>> collect = list.stream().collect(Collectors.groupingBy(this::customKey));
+//        Map<String, List<Map.Entry<String, Object>>> collect = list.stream().flatMap(m -> m.entrySet().stream()).collect(Collectors.groupingBy(Map.Entry::getKey));
+        Map<Object, List<Map<String, Object>>> collect = list.stream().collect(Collectors.groupingBy(x -> x.get("dicId")));
+        System.out.println(collect);
     }
 }
