@@ -25,8 +25,8 @@ public class GeneratorDemo {
                             .pathInfo(Collections.singletonMap(OutputFile.xml, outPath)); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("rf_zk_zx_monthly_statistics_inter") // 设置需要生成的表名
-                            .addTablePrefix("rf_zk_zx_"); // 设置过滤表前缀
+                    builder.addInclude("ee_order_acc_charter_one_areanode") // 设置需要生成的表名
+                            .addTablePrefix("ee_order_"); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();

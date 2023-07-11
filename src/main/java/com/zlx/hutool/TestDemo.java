@@ -9,16 +9,27 @@ import cn.hutool.core.io.file.Tailer;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.XmlUtil;
+import cn.hutool.script.ScriptRuntimeException;
+import cn.hutool.script.ScriptUtil;
 import com.alibaba.excel.util.IoUtils;
 import com.zlx.java8features.User;
 import lombok.extern.slf4j.Slf4j;
+import org.python.icu.math.MathContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
+import javax.script.CompiledScript;
+import javax.script.ScriptException;
 import javax.sound.sampled.LineListener;
+import javax.xml.namespace.QName;
+import javax.xml.xpath.XPathConstants;
 import java.io.*;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -36,17 +47,45 @@ public class TestDemo {
 //        System.out.println(a + "");
 //        System.out.println((Double.valueOf("0")).intValue());
 //        System.out.println(String.valueOf(null));
-        System.out.println("sdfs".contains(""));
-        byte[] b = new byte[]{'d','e','f'};
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        OutputStream outputStream = new ByteArrayOutputStream();
+//        xmlTest();
+        String names = "北京\n" +
+                "天津\n" +
+                "河北\n" +
+                "山西\n" +
+                "内蒙古\n" +
+                "辽宁\n" +
+                "吉林\n" +
+                "黑龙江\n" +
+                "上海\n" +
+                "江苏\n" +
+                "浙江\n" +
+                "安徽\n" +
+                "福建\n" +
+                "江西\n" +
+                "山东\n" +
+                "河南\n" +
+                "湖北\n" +
+                "湖南\n" +
+                "广东\n" +
+                "广西\n" +
+                "海南\n" +
+                "重庆\n" +
+                "四川\n" +
+                "贵州\n" +
+                "云南\n" +
+                "西藏\n" +
+                "陕西\n" +
+                "甘肃\n" +
+                "青海\n" +
+                "宁夏\n" +
+                "新疆\n" +
+                "合计\n";
+        String replace = names.replace("\n", ",");
+        System.out.println(replace);
 
-        byteArrayOutputStream.write(b);
-        byteArrayOutputStream.close();
-//        byteArrayOutputStream.writeTo(outputStream);
-        outputStream.write(byteArrayOutputStream.toByteArray());
-        System.out.println(byteArrayOutputStream);
-        System.out.println(outputStream);
+//        System.out.println(BigDecimal.ZERO);
+//        BigDecimal divide = loanAmount.divide(interestRate, 2, RoundingMode.HALF_UP);
+//        System.out.println(divide.toString());
     }
 
     /**
@@ -156,7 +195,7 @@ public class TestDemo {
         // 文件拷贝
         Resource resource = new ClassPathResource("hutoolIo/公司人员.png");
         BufferedOutputStream outputStream = FileUtil.getOutputStream("C:\\workplace\\mine\\myjavase\\src\\main\\resources\\hutoolIo/copy.png");
-        IoUtil.copy(resource.getInputStream(),outputStream,IoUtil.DEFAULT_BUFFER_SIZE);
+        IoUtil.copy(resource.getInputStream(), outputStream, IoUtil.DEFAULT_BUFFER_SIZE);
     }
 
     public static void test4() {
@@ -166,7 +205,7 @@ public class TestDemo {
     }
 
     public static void test5() throws IOException {
-        Tailer tailer = new Tailer(FileUtil.file("C:\\workplace\\mine\\myjavase\\word.txt"),Tailer.CONSOLE_HANDLER,1);
+        Tailer tailer = new Tailer(FileUtil.file("C:\\workplace\\mine\\myjavase\\word.txt"), Tailer.CONSOLE_HANDLER, 1);
         tailer.start();
     }
 
@@ -177,6 +216,7 @@ public class TestDemo {
 
     /**
      * 反射
+     *
      * @throws IOException
      */
     public static void test7() throws IOException {
@@ -194,6 +234,69 @@ public class TestDemo {
         @Override
         public void handle(String s) {
             log.info(s);
+        }
+    }
+
+    /**
+     * xml解析
+     */
+    public static void xmlTest() {
+        String xml = "<root>\n" +
+                "\t<productInstId>1</productInstId>\n" +
+                "\t<productName code='prod'>产品</productName>\n" +
+                "\t<productAttr>\n" +
+                "\t\t<attr>\n" +
+                "\t\t\t<code>属性编码1</code>\n" +
+                "\t\t\t<name>属性名称1</name>\n" +
+                "\t\t</attr>\n" +
+                "\t\t<attr>\n" +
+                "\t\t\t<code>属性编码2</code>\n" +
+                "\t\t\t<name>属性名称2</name>\n" +
+                "\t\t</attr>\n" +
+                "\t</productAttr>\n" +
+                "</root>";
+
+        Document document = XmlUtil.parseXml(xml);
+        Element rootElement = XmlUtil.getRootElement(document);
+
+        // 获取标签对应值
+        String productInstId = XmlUtil.elementText(rootElement, "productInstId");
+        System.out.println(productInstId);
+
+        // 获取标签内属性
+        Element productName = XmlUtil.getElement(rootElement, "productName");
+        String code = productName.getAttribute("code");
+        System.out.println(code);
+
+        // 获取数组类型标签值
+        Element productAttr = XmlUtil.getElement(rootElement, "productAttr");
+        List<Element> attrs = XmlUtil.getElements(productAttr, "attr");
+        for (Element attr : attrs) {
+            String code1 = XmlUtil.elementText(attr, "code");
+            String name = XmlUtil.elementText(attr, "name");
+            System.out.println(code1);
+            System.out.println(name);
+        }
+
+        // 直接根据路径获取
+        Object byXPath = XmlUtil.getByXPath("/root/productInstId", document, XPathConstants.STRING);
+        System.out.println(byXPath);
+
+        // 通过node获取数据
+        Node nodeByXPath = XmlUtil.getNodeByXPath("/root/productInstId", document);
+        String textContent = nodeByXPath.getTextContent();
+        System.out.println(textContent);
+    }
+
+    /**
+     * 执行js脚本
+     */
+    public static void testJsScript() {
+        CompiledScript script = ScriptUtil.compile("print('Script test!');");
+        try {
+            script.eval();
+        } catch (ScriptException e) {
+            throw new ScriptRuntimeException(e);
         }
     }
 }

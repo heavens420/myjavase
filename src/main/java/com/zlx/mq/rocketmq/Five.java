@@ -51,7 +51,7 @@ public class Five {
                 // 参数 ： 队列对象，消息对象，业务标识
                 @Override
                 public MessageQueue select(List<MessageQueue> list, Message message, Object o) {
-                    // 为什么先转String 再转 int:  因为 messages.get(i).get("orderId") 会赋值给 Object o,此时o的实际类型为String类型
+                    // 为什么先转String 再转 int:  因为 messages.get(i).get("orderId") 会赋值给 Object o,此时o的实际类型为Object类型
                     //                          所以,必须先转为String类型才能转为int类型  直接转int则报错
                     int id = Integer.valueOf((String) o);
                     int index = id % list.size();

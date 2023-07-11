@@ -4,14 +4,20 @@ package com.zlx.io;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.val;
+import org.apache.ibatis.annotations.Param;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.io.Reader;
+import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,13 +31,16 @@ import java.util.stream.Stream;
 public class ReadFile {
 
 //    static String path = "C:\\workspace\\java\\myproject\\myjavase\\src\\main\\java\\com\\zlx\\java8features\\LambdaTest.java";
-    static String path = "C:\\Users\\heave\\Desktop\\DeskTop\\orgList.json";
+//    static String path = "C:\\Users\\heave\\Desktop\\云网应用数据制作-版本文件.txt";
+    static String path = "C:\\Users\\heave\\Desktop\\昌吉市第七小学骨干教师、学科带头人管理考核方案.doc";
 
     public static void main(String[] args) throws IOException {
-//        readFileByLine();
+        readFileByLine();
 //        readAllFiles();
 //        readFiles2();
 //        readJsonText();
+//        readFiles4();
+//        readFiles5();
     }
 
     public static void readJsonText() throws IOException {
@@ -98,5 +107,41 @@ public class ReadFile {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
         String content = new String(bytes, StandardCharsets.UTF_8);
         System.out.println(content);
+    }
+
+    /**
+     * 使用NIO读取文件
+     * @throws IOException
+     */
+    public static void readFiles4() throws IOException {
+        Path path = Paths.get("C:\\workplace\\mine\\myjavase\\src\\main\\java\\com\\zlx\\io\\IoDemo.java");
+        FileChannel channel = FileChannel.open(path, StandardOpenOption.READ);
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        while (channel.read(buffer) != -1) {
+            // 切换为读模式
+            buffer.flip();
+            while (buffer.hasRemaining()) {
+                System.out.print((char) buffer.get());
+            }
+            buffer.clear();
+        }
+        channel.close();
+    }
+
+
+    /**
+     *  基于MappedByteBuffer的读 将文件映射到内存 避免了不必要的IO 速度更快
+     * @throws IOException
+     */
+    public static void readFiles5() throws IOException {
+        String path = "C:\\workplace\\mine\\myjavase\\src\\main\\java\\com\\zlx\\io\\IoDemo.java";
+//        Path path = Paths.get("C:\\workplace\\mine\\myjavase\\src\\main\\java\\com\\zlx\\io\\IoDemo.java");
+
+        FileChannel chanel = new RandomAccessFile(path,"rw").getChannel();
+        MappedByteBuffer buffer = chanel.map(FileChannel.MapMode.READ_WRITE, 0, chanel.size());
+        while (buffer.hasRemaining()) {
+            System.out.print((char) buffer.get());
+        }
+        chanel.close();
     }
 }

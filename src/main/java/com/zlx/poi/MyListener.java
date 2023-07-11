@@ -42,12 +42,13 @@ public class MyListener  extends AnalysisEventListener<DataModel> implements Con
      * 异常处理
      * @param exception
      * @param context
-     * @throws Exception
      */
     @Override
-    public void onException(Exception exception, AnalysisContext context) throws Exception {
+    public void onException(Exception exception, AnalysisContext context) {
         if (exception instanceof ExcelDataConvertException){
             System.out.println("数据解析异常，但是会继续解析下一行");
+            exception.printStackTrace();
+            System.exit(1);
         }
     }
 

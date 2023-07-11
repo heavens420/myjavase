@@ -1,6 +1,13 @@
 package com.zlx.java8features;
 
+import kotlin.jvm.functions.Function1;
+
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * java8 Function {@link java.util.function}
@@ -15,6 +22,7 @@ public class LambdaFunction2 {
 
         // 2.  Supplier<T>：产生一个给定类型的结果。
         Supplier<String> supplyString = () -> "hello world";
+        Supplier<User> user = User::new;
         System.out.println(supplyString.get()); // 输出 hello world
 
         // 3.  Predicate<T>：接受一个参数返回一个Boolean值的操作。
@@ -24,6 +32,12 @@ public class LambdaFunction2 {
         // 4.  Function<T,  R>：接受一个输入参数，返回一个结果。
         Function<String, Integer> strLength = String::length;
         System.out.println(strLength.apply("hello")); // 输出 5
+        // 计算长度之后 对结果二次运算
+        Function<String, Integer> stringIntegerFunction = strLength.andThen(x -> x + 20);
+        System.out.println(stringIntegerFunction.apply("123")); // 23
+        // 计算长度之前 先对另一个字符串做长度运算 并将结果保留到真正运算的时候
+        Function<Object, Integer> compose = stringIntegerFunction.compose(x -> "fs" + x);
+        System.out.println(compose.apply("012345")); // 28 fs长度2 0-5长度6 +20 = 28
 
         // 5.  UnaryOperator<T>：和Function接口相同，但输入和输出类型相同。
         UnaryOperator<Integer> addOne = x -> x + 1;
@@ -61,5 +75,8 @@ public class LambdaFunction2 {
         IntConsumer intConsumer = num -> System.out.println("数字" + num);
         intConsumer.accept(123);
 
+        Function<Object[], List<Object>> function = Arrays::asList;
+        List<Object> apply = function.apply(new Integer[]{123, 123, 123, 123});
+        System.out.println(apply);
     }
 }
