@@ -7,7 +7,7 @@ import com.zlx.GOF.builder.builder1.product.AirShip;
  * 飞船组装
  */
 public class ConstructorAirShip {
-    private AirShipBuilder airShipBuilder;
+    private final AirShipBuilder airShipBuilder;
 
     public ConstructorAirShip(AirShipBuilder airShipBuilder) {
         this.airShipBuilder = airShipBuilder;

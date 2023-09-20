@@ -1,5 +1,7 @@
 package com.zlx.jihe;
 
+import cn.hutool.core.map.MapUtil;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,10 +13,28 @@ public class MapTest {
     public static void main(String[] args) {
 //       foreachList();
 //       testStream();
-       treeMap();
+//       treeMap();
 //        testCommonOperators();
 //        hashTable();
 //        mapOperations();
+//        orderMap();
+//        Integer integer = Integer.valueOf("");
+//        System.out.println(integer);
+
+        Map<String, Object> param = new HashMap<>();
+        // 客户名称
+        param.put("requestType", "2022003");
+        param.put("org_customer_manage", "0");
+        param.put("userID", "");
+        param.put("crm_web_cust_id", ""); //客户ID
+        param.put("customer_code", ""); //客户编码
+        param.put("isLike", "1"); //是否是模糊查询
+
+        Map<String,Object> params = new HashMap<>();
+        param.put("customerName", MapUtil.getStr(params, "customerName"));
+        Map map = MapUtil.get(param, "list", Map.class);
+        System.out.println(map);
+
     }
 
     /**
@@ -100,7 +120,9 @@ public class MapTest {
         }
         System.out.println(list);
 
+    }
 
+    public static void orderMap() {
         /*8888888888******************************************?*/
         Map<String, Integer> map1 = new HashMap(8);
         map1.put("q", 12);
@@ -111,10 +133,10 @@ public class MapTest {
         map1.put("re", 2333);
         map1.put("s", 2333);
         //必须用LikedHashMap才能对Integer类型排序，String类型皆可
-        Map sortedMap = new LinkedHashMap(8);
+        Map<String,Integer> sortedMap = new LinkedHashMap<>(8);
         map1.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
         LinkedHashMap<String, Integer> collect = map1.entrySet().stream().sorted((v1, v2) -> v1.getValue().compareTo(v2.getValue())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum, LinkedHashMap::new));
-
+        System.out.println("----------------------------------------------------------------");
         System.out.println("排序map1"+sortedMap);
         System.out.println("排序map2"+collect);
     }
@@ -139,51 +161,31 @@ public class MapTest {
     public static void hashTable() {
 //        Map<String, String> map = new Hashtable<>();
         Map<String, String> map = new HashMap<>();
-        Map<String, String> reduce = Stream.iterate(1L,x-> x < 2000000 ,x -> x + 1).reduce(map,
-                (a, b) -> {
-                    a.put(b+"", b+"");
-                    return a;
-                }, (u, t) -> {
-                    t.forEach(u::put);
-//                    u.putAll(t);
-                    return u;
-                });
-        reduce.forEach((k, v) -> System.out.println(k + "=" + v));
+//        Map<String, String> reduce = Stream.iterate(1L,x-> x < 2000000 ,x -> x + 1).reduce(map,
+//                (a, b) -> {
+//                    a.put(b+"", b+"");
+//                    return a;
+//                }, (u, t) -> {
+//                    t.forEach(u::put);
+////                    u.putAll(t);
+//                    return u;
+//                });
+//        reduce.forEach((k, v) -> System.out.println(k + "=" + v));
 
-//        try {
-//            for (int i = 0; i < 100; i++) {
-//                int finalI = i;
-//                new Thread(() -> {
-//                    for (int j = 0; j < 10000; j++) {
-//                        String name = Thread.currentThread().getName();
-//                        long id = Thread.currentThread().getId();
-//                        map.put(id + "-" + finalI + "-" + j, name + finalI);
-//                    }
-//                }).start();
-//            }
-//            for (int i = 0; i < 100; i++) {
-//                int finalI = i;
-//                new Thread(() -> {
-//                    for (int j = 0; j < 10000; j++) {
-//                        String name = Thread.currentThread().getName();
-//                        long id = Thread.currentThread().getId();
-//                        map.put(id + "-" + finalI + "-" + j, name + finalI);
-//                    }
-//                }).start();
-//            }
-//            for (int i = 0; i < 100; i++) {
-//                int finalI = i;
-//                new Thread(() -> {
-//                    for (int j = 0; j < 10000; j++) {
-//                        String name = Thread.currentThread().getName();
-//                        long id = Thread.currentThread().getId();
-//                        map.put(id + "-" + finalI + "-" + j, name + finalI);
-//                    }
-//                }).start();
-//            }
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            for (int i = 0; i < 100; i++) {
+                int finalI = i;
+                new Thread(() -> {
+                    for (int j = 0; j < 100; j++) {
+                        String name = Thread.currentThread().getName();
+                        long id = Thread.currentThread().getId();
+                        map.put(id + "-" + finalI + "-" + j, name + finalI);
+                    }
+                }).start();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 //        map.forEach((k, v) -> System.out.println(k + "=" + v));
     }
 
@@ -204,7 +206,7 @@ public class MapTest {
         map.put("kkk", 789);
         map.put("ddd", 333);
         map.forEach((k, v) -> System.out.println(k + "=" + v));
-
+        System.out.println("================================================================");
         List<Map.Entry<String, Integer>> list = new ArrayList<>(map.entrySet());
         Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
             @Override
@@ -216,6 +218,7 @@ public class MapTest {
         System.out.println("----------------------------------------------------------------");
         list.forEach(x -> System.out.println(x.getKey() + "=" + x.getValue()));
 
+        System.out.println("****************************************************************");
         LinkedHashMap<String, Integer> reduce = list.stream().reduce(new LinkedHashMap<>(), (x, y) -> {
             x.put(y.getKey(), y.getValue());
             return x;

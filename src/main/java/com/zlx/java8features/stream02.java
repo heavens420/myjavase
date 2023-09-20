@@ -1,10 +1,9 @@
 package com.zlx.java8features;
 
+import cn.hutool.core.collection.CollectionUtil;
+
 import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -83,6 +82,8 @@ public class stream02 {
         Stream.of(arr).forEach(System.out::println);
 
         Arrays.stream(arr).forEach(System.out::print);
+        System.out.println("----------------------------------------------------------------");
+        testSplitList();
     }
 
     public static void inForEach() {
@@ -103,6 +104,19 @@ public class stream02 {
 
         evenIntegers.forEach(i -> System.out.println("i is even"));
         oddIntegers.forEach(i -> System.out.println("i is old"));
+    }
+
+    public static void testSplitList() {
+        double rint = Math.rint(23.43); // 23.0
+        System.out.println(rint);
+        new Random().ints(10,0,10).forEach(System.out::println);
+
+        List<Integer> collect = Stream.generate(() -> new Random().nextInt(10)).limit(3300).collect(Collectors.toList());
+
+        List<Integer> collect1 = Stream.iterate(1, x -> x + 100).limit(1000).collect(Collectors.toList());
+
+        List<List<Integer>> split = CollectionUtil.split(collect, 1000);
+//        System.out.println(split);
     }
 
 }

@@ -6,8 +6,11 @@ import com.alibaba.excel.enums.CellExtraTypeEnum;
 import com.alibaba.excel.read.metadata.ReadSheet;
 //import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * easyExcel 读数据
@@ -19,13 +22,18 @@ public class EasyExcelRead {
 
         String path2 = "C:\\Users\\420\\Downloads\\Documents/easyexcel.xlsx";
 
+        String path3 = "C:\\Users\\heave\\Desktop\\mysource\\宗调-ITSM\\生产指挥\\两类专线报表\\开通数据统计日\\全网开通数据统计日清单2023年6月4日.xls";
+
 //        FileInputStream fileInputStream = new FileInputStream(path);
 
         // 读取指定sheet（单个）
-//        EasyExcel.read(path2, DataModel.class, new MyListener()).sheet(0).doRead();
+        EasyExcel.read(path3, new MyListener()).sheet(0).doRead();
 
         //读取多行头  默认读取一行头 可以设置读取多行头
-        EasyExcel.read(path2,DataModel.class,new MyListener()).sheet(0).headRowNumber(2).doRead();
+//        EasyExcel.read(path3,DataModel.class,new MyListener()).sheet(0).headRowNumber(1).doRead();
+
+        // 直接返回读取的数据列表
+//        List<DataModel> DataModelList = EasyExcel.read(new FileInputStream(path3)).head(DataModel.class).sheet().headRowNumber(2).doReadSync();
 
         // 读取额外类型  额外类型默认不读 需要单独设置读取
 //        EasyExcel.read(path2,DataModel.class,new MyListener()).extraRead(CellExtraTypeEnum.COMMENT).sheet(0).doRead();
