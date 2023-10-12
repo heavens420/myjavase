@@ -8,8 +8,9 @@ package com.zlx.GOF.prototype.base;
 public class Test {
     public static void main(String[] args) throws CloneNotSupportedException {
         RealizeType obj1 = new RealizeType();
-        RealizeType obj2 = ((RealizeType) obj1.clone());
+//        RealizeType obj2 = ((RealizeType) obj1.clone());
+        Object clone = obj1.clone();
 
-        System.out.println(obj1 == obj2);
+        System.out.println(obj1 == clone);
     }
 }

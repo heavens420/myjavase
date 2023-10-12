@@ -14,6 +14,6 @@ public class RealizeType implements Cloneable {
     @Override
     public Object clone() throws CloneNotSupportedException {
         System.out.println("具体原型类复制成功");
-        return (RealizeType)super.clone();
+        return super.clone();
     }
 }

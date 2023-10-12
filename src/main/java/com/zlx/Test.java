@@ -3,6 +3,7 @@ package com.zlx;
 import cn.hutool.core.util.XmlUtil;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Node;
@@ -15,6 +16,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -55,7 +58,45 @@ public class Test {
 //        String format = DateUtil.format(new Date(), "yyyy-MM-01");
 //        System.out.println(format);
 
-        testXml();
+//        testXml();
+
+//        Map<String,String> map = new HashMap<String,String>();
+//        map.put("name", "{\"orderId\": \"88\",\"apiCode\": \"HD_WO_STATE_CHANGE_BRANCKH\",\"orderStatus\": \"回调分支_人工处理\",\"changeTime\": \"2021-12-12 01:00:03\"}");
+//        String data = fillTemplateData(map, "<<name>>");
+//        log.info("data：{}",data);
+
+
+    }
+
+    private static String fillTemplateData(Map<String, String> params, String template) {
+        if (StringUtils.isEmpty(template)) {
+            return null;
+        }
+        String temp = template;
+        String matchStr = "<<\\w+>>";
+        Pattern localPattern = Pattern.compile(matchStr);
+        Matcher localMatcher = localPattern.matcher(temp);
+//		LOGGER.info("开始替换模板参数,params:{},template:{}", params, temp);
+        while (localMatcher.find()) {
+            int i = localMatcher.start();
+            int j = localMatcher.end();
+
+            String paramName = temp.substring(i + 2, j - 2);
+            String replaceStr = "<<" + paramName + ">>";
+
+            String retValue = (String) params.get(paramName);
+            if (retValue == null) {
+//				LOGGER.info("替换模板时,{" + paramName + "}参数找不到！替换为空值");
+                temp = temp.replaceAll(replaceStr, "");
+                localMatcher = localPattern.matcher(temp);
+            } else {
+                temp = temp.replaceAll(replaceStr, retValue);
+                localMatcher = localPattern.matcher(temp);
+            }
+
+        }
+//		LOGGER.info("替换后结果：{}", temp);
+        return temp;
     }
 
     public static void testXml() throws DocumentException {

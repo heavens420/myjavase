@@ -6,7 +6,7 @@ package com.zlx.GOF.singleton.hungry;
 public class StaticInnerClass {
     private static volatile StaticInnerClass singleton = null;
 
-    public StaticInnerClass() {
+    private StaticInnerClass() {
         System.out.println(Thread.currentThread().getName()+"构造方法");
     }
 

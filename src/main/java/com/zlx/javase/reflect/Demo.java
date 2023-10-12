@@ -1,5 +1,6 @@
 package com.zlx.javase.reflect;
 
+import cn.hutool.core.util.ReflectUtil;
 import com.zlx.java8features.User;
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,6 +22,8 @@ public class Demo {
             field.setAccessible(true);
             String name = field.getName();
             Object value = field.get(user);
+            Object fieldValue = ReflectUtil.getFieldValue(user, field);
+            log.info("hutool get value:{}",fieldValue);
             log.info("before {}:{}", name,value);
             if (value == null) {
                 field.set(user, "666");
