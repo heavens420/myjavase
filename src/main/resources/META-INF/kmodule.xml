@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!--定位规则，同时以ksession-rules作为该规则入口（目前是这样理解的，理解有错误请留言互相讨论一下，后面再改）-->
+    <kbase name="ruleKb" packages="rules">
+        <ksession name="ruleKs"/>
+    </kbase>
+</kmodule>
+
+

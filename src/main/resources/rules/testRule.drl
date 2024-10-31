@@ -1,0 +1,170 @@
+package rules;
+import java.util.HashMap;
+import java.util.Map;
+import com.zlx.java8features.User;
+import com.zlx.drools.bean.BookBean
+import com.zlx.drools.bean.UserBean
+
+global java.util.List list;
+global java.util.List cfsPreposeList;
+global java.util.List listParamCode;
+global java.util.List listParamValue;
+global java.util.List listParamOldValue;
+global java.util.List listQuery;
+
+rule "test-01"
+when
+    $u: User(id > 1)
+then
+    $u.setName("hahaha");
+    System.out.println("=================="+$u);
+end
+
+rule "test-02"
+when
+    $u: User(name=="zs")
+then
+    System.out.println("------------------"+$u);
+end
+
+rule "test-03"
+when
+    $u: User(name=="ls")
+then
+    System.out.println("------------------"+$u);
+end
+
+
+rule "test-04"
+agenda-group "multi"
+no-loop
+when
+    // list1：UserBean对象本身  $lst: UserBean的bookBeanList属性值 相当于变量赋值
+    list1: UserBean($lst:bookBeanList)
+    // $book: 遍历$lst中的变量值满足id>10的BookBean
+    $book: BookBean(id > 10) from $lst
+    // 满足id>10后 再次判断id> 20 (冗余写法)
+    // 这里只是展示语法 这里from的是对象 也是可以的
+    newBook: BookBean(id > 20) from $book
+then
+    System.out.println("list1--"+list1);
+    System.out.println("$lst--"+$lst);
+    System.out.println("$book--"+$book);
+    System.out.println("new book--"+newBook);
+end
+
+rule "test-05"
+agenda-group "multi"
+salience 10000
+when
+    user  :  UserBean()
+//    userBook: BookBean() from user.bookBeanList
+//    BookBean(id > 10) from userBook
+then
+    System.out.println("-----------------"+user.toString());
+end
+
+
+//rule "rule_4156"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="24010302") from mianProductDto
+//orderAttrListDto2 : OrderAttrListDto() adjunctProductDto : AdjunctProductDto() from orderAttrListDto2.adjunctProductDtoList
+//AdjunctProductDto(adjunctProdCode=="13970") from adjunctProductDto  or AdjunctProductDto(adjunctProdCode=="24000060") from adjunctProductDto  or AdjunctProductDto(adjunctProdCode=="13205000001000270627") from adjunctProductDto
+//AdjunctProductDto(adjunctActionCode=="KEEP") from adjunctProductDto
+//AdjunctProductDto(adjunctProdCode=="35102023000000000000") from adjunctProductDto
+//AdjunctProductDto(adjunctActionCode=="ADD") from adjunctProductDto  or AdjunctProductDto(adjunctActionCode=="DEL") from adjunctProductDto
+//
+//
+//
+//	then
+//list.add("CommunicationsAssistant_CFS_MODIFY_API_v1");
+//System.out.println("规则编码为rule_4156被执行");
+//listQuery.add("rule_4156");
+//	end
+//rule "rule_7028"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="6600001000") from mianProductDto
+//	then
+//list.add("2GRomingVoice_RFS_MODIFY_API_v1");
+//System.out.println("规则编码为rule_7028被执行");
+//listQuery.add("rule_7028");
+//	end
+//rule "rule_7141"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="10001") from mianProductDto
+//MianProductDto(mainActionCode=="ADD") from mianProductDto
+//	then
+//list.add("CFS_ADDRESS_POOL_EXPANSION_v1");
+//System.out.println("规则编码为rule_7141被执行");
+//listQuery.add("rule_7141");
+//	end
+//rule "rule_7142"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="10002") from mianProductDto
+//MianProductDto(mainActionCode=="ADD") from mianProductDto
+//	then
+//list.add("CFS_IDENTIFICARION_AND_OPTIMIZE_POOR_QUALITY_v2");
+//System.out.println("规则编码为rule_7142被执行");
+//listQuery.add("rule_7142");
+//	end
+//rule "rule_7144"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="10001") from mianProductDto
+//MianProductDto(mainActionCode=="101") from mianProductDto
+//	then
+//list.add("5GSACoreNetData_RFS_UNINSTALL_API_v1");
+//System.out.println("规则编码为rule_7144被执行");
+//listQuery.add("rule_7144");
+//	end
+//rule "rule_7002"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="24010302") from mianProductDto
+//MianProductDto(mainActionCode=="102") from mianProductDto
+//	then
+//list.add("CFS_cs1_HANDLE_API_v1");
+//System.out.println("规则编码为rule_7002被执行");
+//listQuery.add("rule_7002");
+//	end
+//rule "rule_7149"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="test_use") from mianProductDto
+//	then
+//list.add("UQ_INSTALL_API_v1");
+//System.out.println("规则编码为rule_7149被执行");
+//listQuery.add("rule_7149");
+//	end
+//rule "rule_7152"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto() mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="csyjgzcl") from mianProductDto
+//	then
+//list.add("RFS_TROUBLESHOOTING_TRANSMISSION_HARDWARE_FAULTS_HANDLE_API_v1");
+//System.out.println("规则编码为rule_7152被执行");
+//listQuery.add("rule_7152");
+//	end
+//rule "rule_7000111"
+//agenda-group "PRODUCT_SERVICE_CONVERT_RULE"
+//	when
+//orderAttrListDto : OrderAttrListDto()
+//mianProductDto : MianProductDto() from orderAttrListDto.mianProductDtoList
+//MianProductDto(mainProdCode=="{mainProdCode}") from mianProductDto
+//	then
+//list.add("RFS_TROUBLESHOOTING_TRANSMISSION_HARDWARE_FAULTS_HANDLE_API_v1");
+//System.out.println("规则编码为rule_7000被执行");
+//listQuery.add("rule_7000111");
+//	end

@@ -8,9 +8,9 @@ import java.util.Collections;
 
 public class GeneratorDemo {
     public static void main(String[] args) {
-        String url = "jdbc:mysql://192.168.80.169:3306/idc_cloud?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai";
+        String url = "jdbc:postgresql://192.168.222.96:5433/root?currentSchema=public&PuseUnicode=true&characterEncoding=utf8&stringtype=unspecified&rewriteBatchedStatements=true";
         String username = "root";
-        String password = "mysql2015";
+        String password = "Root123#";
         String outPath = "C:\\workplace\\mine\\myjavase\\src\\main\\java\\com\\zlx\\mybatisplus\\code";
         FastAutoGenerator.create(url, username, password)
                 .globalConfig(builder -> {
@@ -20,13 +20,13 @@ public class GeneratorDemo {
                             .outputDir(outPath); // 指定输出目录
                 })
                 .packageConfig(builder -> {
-                    builder.parent("com.gccloud.idc.entity.iotManage") // 设置父包名
+                    builder.parent("com.zlx.mockprocessdata") // 设置父包名
 //                            .moduleName("system") // 设置父包模块名
                             .pathInfo(Collections.singletonMap(OutputFile.xml, outPath)); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("ee_order_acc_charter_one_areanode") // 设置需要生成的表名
-                            .addTablePrefix("ee_order_"); // 设置过滤表前缀
+                    builder.addInclude("wf_activityinst,wf_transctrl,wf_processinst,so_api_inst,so_api_execute_rank,bm_cust_order") // 设置需要生成的表名
+                            .addTablePrefix(""); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .execute();

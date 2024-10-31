@@ -1,7 +1,10 @@
 package com.zlx;
 
 import cn.hutool.core.util.XmlUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.zlx.java8features.User;
+import liquibase.pro.packaged.S;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.DocumentException;
@@ -16,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -65,9 +69,74 @@ public class Test {
 //        String data = fillTemplateData(map, "<<name>>");
 //        log.info("data：{}",data);
 
+//        testAsync();
+//        testJson2();
+//        Map<String, String> map = new HashMap<>();
+//        String s = map.get("sd");
+//        String ss = "//package usi.dbdp.soasync.service\\n\\n\\nimport cn.hutool.core.date.DateUtil\\nimport cn.hutool.core.util.StrUtil\\nimport com.alibaba.fastjson.JSON\\nimport com.alibaba.fastjson.JSONObject\\nimport org.springframework.util.StringUtils\\nimport usi.dbdp.redis.CommonRedisUtil\\nimport usi.dbdp.redis.ConstantForRedis\\nimport usi.dbdp.redis.dto.ApiForRedis\\nimport usi.dbdp.redis.dto.ExpDealPolicyForRedis\\nimport usi.dbdp.soasync.SoConstantForBwp\\nimport usi.dbdp.soasync.dto.ApiInstDto\\nimport usi.dbdp.soasync.dto.cnccCallBack.CnccCallBackMsgDto\\nimport usi.dbdp.soasync.util.ScriptBwpOperations\\nimport usi.dbdp.soasync.service.SoSyncService\\nimport usi.dbdp.soasync.util.SpringContextUtil\\n\\n//class CallBackOrder {\\n\\n\\n// 入口函数 相当于main方法\\ndef execute() {\\n    CommonRedisUtil commonRedisUtil = SpringContextUtil.applicationContext.getBean(CommonRedisUtil.class)\\n    ScriptBwpOperations scriptBwpOperations = SpringContextUtil.applicationContext.getBean(ScriptBwpOperations.class)\\n    SoSyncService soSyncService = SpringContextUtil.applicationContext.getBean(SoSyncService.class)\\n\\n    def map = $groovyParam\\n    // Map<String, String> map = JSONObject.parseObject(mqInfo, Map.class)\\n    println(\\\"================map=================\\\\n\\\" + map)\\n    String newOrOld = map.get(\\\"newOrOld\\\");\\n    Map<String,Object> soAsyncData = map.get(\\\"soAsyncData\\\");\\n    String resApiInstId = \\\"\\\";\\n    String resultCode = \\\"\\\";\\n\\n    println(\\\"================newOrOld=================\\\" + newOrOld)\\n    if (\\\"new\\\" == newOrOld) {\\n        CnccCallBackMsgDto dto = JSON.parseObject(JSONObject.toJSONString(soAsyncData), CnccCallBackMsgDto.class);\\n        println(\\\"===========dto========\\\" + JSONObject.toJSONString(dto))\\n        resApiInstId = dto.getMsgHead().getMsgId();\\n        resultCode = dto.getMsgBody().getResultCode();\\n    }\\n    // 当前API实例 for apiInst update\\n    ApiInstDto apiInstDto = new ApiInstDto();\\n\\n    long orderId;\\n    String resApiCode;\\n    long processInstId;\\n    long activityInstId;\\n    String policyCode = null\\n\\n    try {\\n        String apiInstStr = commonRedisUtil.getRedis(ConstantForRedis.API_INST + resApiInstId, ConstantForRedis.GROUP_NAME_SO_API_INST);\\n        apiInstDto = JSON.parseObject(apiInstStr, ApiInstDto.class);\\n        println(\\\"===========apiInstDto==========\\\" + JSONObject.toJSONString(apiInstDto))\\n        resApiCode = apiInstDto.getApiCode();\\n        ApiForRedis apiConfInfo = JSONObject.parseObject(commonRedisUtil.getRedis(ConstantForRedis.API + resApiCode + \\\"_\\\" + apiInstDto.getApiVersion(), ConstantForRedis.GROUP_NAME_SO_BASECONFIG), ApiForRedis.class);\\n\\n        orderId = apiInstDto.getOrderId();\\n        processInstId = apiInstDto.getProcessInstId();\\n        activityInstId = apiInstDto.getActivityInstId();\\n        if (apiConfInfo.getBranchPolicyList() != null && apiConfInfo.getBranchPolicyList().size() > 0) {\\n            println(\\\"==============getBranchPolicyList==================\\\" + JSONObject.toJSONString(apiConfInfo.getBranchPolicyList()))\\n            policyCode = apiConfInfo.getBranchPolicyList().get(0).getPolicyCode()\\n        }\\n        // 解析异步服务包的报文\\n        if ((\\\"200\\\" == resultCode && \\\"new\\\" == newOrOld) || (\\\"0000\\\" == resultCode && \\\"old\\\" == newOrOld)) {\\n            // 结束环节\\n            scriptBwpOperations.finishActivity(processInstId, activityInstId, policyCode)\\n//            activityService.finishActResResult(processInstId, activityInstId, SoConstantForBwp.USER, SoConstantForBwp.NORMAL);\\n          \\n        } else {\\n            throw new RuntimeException(\\\"=========error param===============\\\")\\n        }   \\n    } catch (Exception e) {\\n        println(\\\"==============================未知异常=======================\\\")\\n        e.printStackTrace()\\n        return e.getMessage()\\n    }\\n    return \\\"success\\\"\\n}\\n\\nexecute()\\n\\n//}\\n";
+//        ss = ss.replace("\\n", "\n").replace("\\\"","\"");
+//        System.out.printf("%s",ss);
+//        testJsonString();
+        String ss = null;
+        String aa = String.valueOf(ss) + "";
+        System.out.println(aa);
 
+        List<Object> list = Arrays.asList("d,3".split(","));
+        System.out.println(list);
+
+        User user = new User();
+        user.setId(1);
+        user.setName("zhangsan");
+        System.out.println(user);
+    }
+    public static void testJsonString() {
+//        JSONObject jsonObject = new JSONObject();
+        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject("{}");
+
+        Object aa = jsonObject.get("aa");
+        log.info("aa: {}", aa);
+//        String bb = jsonObject.getString("bb");
+//        log.info("bb: {}", bb);
+        if(!org.springframework.util.StringUtils.isEmpty(jsonObject.get("CmdPreview"))&&"1".equals(jsonObject.getString("CmdPreview"))){
+            log.info("CmdPreview=--------------------------------");
+        }else {
+            log.info("================");
+        }
     }
 
+    public static void testJson2() {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", "sdf");
+
+        String jsonString = JSONObject.toJSONString(map);
+        String jsonString1 = JSONObject.toJSONString(jsonString);
+        System.out.println(jsonString);
+        System.out.println(jsonString1);
+
+        Map map1 = JSONObject.parseObject(jsonString1, Map.class);
+        System.out.println(map1.toString());
+
+    }
+    public static void testAsync() {
+        System.out.println("2222222222222");
+        CompletableFuture.runAsync(() -> {
+            try {
+                System.out.println("00000000");
+                int a = 1 / 0;
+                System.out.println(a);
+            } catch (Exception e) {
+                log.info("=========={}",e.getMessage());
+                e.printStackTrace();
+            }
+        });
+
+        new Thread(() -> {
+            System.out.println("3333333333");
+            int a = 1 / 0;
+            System.out.println(a);
+        }).start();
+        System.out.println("111111111111");
+    }
     private static String fillTemplateData(Map<String, String> params, String template) {
         if (StringUtils.isEmpty(template)) {
             return null;

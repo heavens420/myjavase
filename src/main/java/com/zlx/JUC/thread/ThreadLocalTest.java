@@ -1,4 +1,4 @@
-package com.zlx.thread;
+package com.zlx.JUC.thread;
 
 public class ThreadLocalTest {
     public static void main(String[] args) {

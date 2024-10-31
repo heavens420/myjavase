@@ -1,6 +1,4 @@
-package com.zlx.thread;
-
-import java.lang.annotation.Target;
+package com.zlx.JUC.thread;
 
 /**
  * @Author Zhao LongLong
